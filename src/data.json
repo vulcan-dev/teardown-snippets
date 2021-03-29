@@ -1,0 +1,1478 @@
+[
+    {
+        "scope": "lua",
+        "body": "GetIntParam()",
+        "prefix": "GetIntParam",
+        "description": "Arguments\nname (string) – Parameter name\ndefault (number) – Default parameter value\n\nReturn value\nvalue (number) – Parameter value\n\n\nExample\n--Retrieve blinkcount parameter, or set to 5 if omitted\nparameterBlinkCount = GetIntParameter(\"blinkcount\", 5)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetFloatParam()",
+        "prefix": "GetFloatParam",
+        "description": "Arguments\nname (string) – Parameter name\ndefault (number) – Default parameter value\n\nReturn value\nvalue (number) – Parameter value\n\n\nExample\n--Retrieve speed parameter, or set to 10.0 if omitted\nparameterSpeed = GetFloatParameter(\"speed\", 10.0)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBoolParam()",
+        "prefix": "GetBoolParam",
+        "description": "Arguments\nname (string) – Parameter name\ndefault (boolean) – Default parameter value\n\nReturn value\nvalue (boolean) – Parameter value\n\n\nExample\n--Retrieve playsound parameter, or false if omitted\nparameterPlaySound = GetBoolParameter(\"playsound\", false)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetStringParam()",
+        "prefix": "GetStringParam",
+        "description": "Arguments\nname (string) – Parameter name\ndefault (string) – Default parameter value\n\nReturn value\nvalue (string) – Parameter value\n\n\nExample\n--Retrieve mode parameter, or \"idle\" if omitted\nparameterMode = GetSrtingParameter(\"mode\", \"idle\")"
+    },
+    {
+        "scope": "lua",
+        "body": "GetVersion()",
+        "prefix": "GetVersion",
+        "description": "Arguments\nnone\nReturn value\nversion (string) – Dot separated string of current version of the game\n\n\nExample\nlocal v = GetVersion()\n--v is \"0.5.0\""
+    },
+    {
+        "scope": "lua",
+        "body": "HasVersion()",
+        "prefix": "HasVersion",
+        "description": "Arguments\nversion (string) – Reference version\n\nReturn value\nmatch (boolean) – True if current version is at least provided one\n\n\nExample\nif HasVersion(\"0.6.0\") then\n\t--conditional code that only works on 0.6.0 or above\nelse\n\t--legacy code that works on earlier versions\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetTime()",
+        "prefix": "GetTime",
+        "description": "Arguments\nnone\nReturn value\ntime (number) – The time in seconds since level was started\n\n\nExample\nlocal t = GetTime()"
+    },
+    {
+        "scope": "lua",
+        "body": "GetTimeStep()",
+        "prefix": "GetTimeStep",
+        "description": "Arguments\nnone\nReturn value\ndt (number) – The timestep in seconds\n\n\nExample\nlocal dt = GetTimeStep()"
+    },
+    {
+        "scope": "lua",
+        "body": "InputPressed()",
+        "prefix": "InputPressed",
+        "description": "Arguments\ninput (string) – The input identifier\n\nReturn value\npressed (boolean) – True if input was pressed during last frame\n\n\nExample\nif InputPressed(\"interact\") then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "InputReleased()",
+        "prefix": "InputReleased",
+        "description": "Arguments\ninput (string) – The input identifier\n\nReturn value\npressed (boolean) – True if input was released during last frame\n\n\nExample\nif InputReleased(\"interact\") then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "InputDown()",
+        "prefix": "InputDown",
+        "description": "Arguments\ninput (string) – The input identifier\n\nReturn value\npressed (boolean) – True if input is currently held down\n\n\nExample\nif InputDown(\"interact\") then\n...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "InputValue()",
+        "prefix": "InputValue",
+        "description": "Arguments\ninput (string) – The input identifier\n\nReturn value\nvalue (number) – Depends on input type\n\n\nExample\nscrollPos = scrollPos + InputValue(\"mousewheel\")"
+    },
+    {
+        "scope": "lua",
+        "body": "SetValue()",
+        "prefix": "SetValue",
+        "description": "Arguments\nvariable (string) – Name of number variable in the global context\nvalue (number) – The new value\ntransition (string, optional) – Transition type. See description.\ntime (number, optional) – Transition time (seconds)\n\nReturn value\nnone\n\nExample\nmyValue = 0\nSetValue(\"myValue\", 1, \"linear\", 0.5)\n\nThis will change the value of myValue from 0 to 1 in a linear fasion over 0.5 seconds"
+    },
+    {
+        "scope": "lua",
+        "body": "StartLevel()",
+        "prefix": "StartLevel",
+        "description": "Arguments\nmission (string) – An identifier of your choice\npath (string) – Path to level XML file\nlayers (string, optional) – Active layers. Default is no layers.\n\nReturn value\nnone\n\nExample\n--Start level with no active layers\nStartLevel(\"level1\", \"MOD/level1.xml\")\n\n--Start level with two layers\nStartLevel(\"level1\", \"MOD/level1.xml\", \"vehicles targets\")"
+    },
+    {
+        "scope": "lua",
+        "body": "SetPaused()",
+        "prefix": "SetPaused",
+        "description": "Arguments\npaused (boolean) – True if game should be paused\n\nReturn value\nnone\n\nExample\n--Pause game and bring up pause menu on HUD\nSetPaused(true)"
+    },
+    {
+        "scope": "lua",
+        "body": "Restart()",
+        "prefix": "Restart",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nif shouldRestart then\nRestart()\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "Menu()",
+        "prefix": "Menu",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nif shouldExitLevel then\nMenu()\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "ClearKey()",
+        "prefix": "ClearKey",
+        "description": "Arguments\nkey (string) – Registry key to clear\n\nReturn value\nnone\n\nExample\n--If the registry looks like this:\n--\tscore\n--\t\tlevels\n--\t\t\tlevel1 = 5\n--\t\t\tlevel2 = 4\n\nClearKey(\"score.levels\")\n\n--Afterwards, the registry will look like this:\n--\tscore"
+    },
+    {
+        "scope": "lua",
+        "body": "ListKeys()",
+        "prefix": "ListKeys",
+        "description": "Arguments\nparent (string) – The parent registry key\n\nReturn value\nchildren (table) – Indexed table of strings with child keys\n\n\nExample\n--If the registry looks like this:\n--\tscore\n--\t\tlevels\n--\t\t\tlevel1 = 5\n--\t\t\tlevel2 = 4\n\nlocal list = ListKeys(\"score.levels\")\nfor i=1, #list do\n\tprint(list[i])\nend\n\n--This will output:\n--level1\n--level2"
+    },
+    {
+        "scope": "lua",
+        "body": "HasKey()",
+        "prefix": "HasKey",
+        "description": "Arguments\nkey (string) – Registry key\n\nReturn value\nexists (boolean) – True if key exists\n\n\nExample\nlocal foo = HasKey(\"score.levels\")"
+    },
+    {
+        "scope": "lua",
+        "body": "SetInt()",
+        "prefix": "SetInt",
+        "description": "Arguments\nkey (string) – Registry key\nvalue (number) – Desired value\n\nReturn value\nnone\n\nExample\nSetInt(\"score.levels.level1\", 4)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetInt()",
+        "prefix": "GetInt",
+        "description": "Arguments\nkey (string) – Registry key\n\nReturn value\nvalue (number) – Integer value of registry node or zero if not found\n\n\nExample\nlocal a = GetInt(\"score.levels.level1\")"
+    },
+    {
+        "scope": "lua",
+        "body": "SetFloat()",
+        "prefix": "SetFloat",
+        "description": "Arguments\nkey (string) – Registry key\nvalue (number) – Desired value\n\nReturn value\nnone\n\nExample\nSetFloat(\"level.time\", 22.3)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetFloat()",
+        "prefix": "GetFloat",
+        "description": "Arguments\nkey (string) – Registry key\n\nReturn value\nvalue (number) – Float value of registry node or zero if not found\n\n\nExample\nlocal time = GetFloat(\"level.time\")"
+    },
+    {
+        "scope": "lua",
+        "body": "SetBool()",
+        "prefix": "SetBool",
+        "description": "Arguments\nkey (string) – Registry key\nvalue (boolean) – Desired value\n\nReturn value\nnone\n\nExample\nSetBool(\"level.robots.enabled\", true)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBool()",
+        "prefix": "GetBool",
+        "description": "Arguments\nkey (string) – Registry key\n\nReturn value\nvalue (boolean) – Boolean value of registry node or false if not found\n\n\nExample\nlocal isRobotsEnabled = GetBool(\"level.robots.enabled\")"
+    },
+    {
+        "scope": "lua",
+        "body": "SetString()",
+        "prefix": "SetString",
+        "description": "Arguments\nkey (string) – Registry key\nvalue (string) – Desired value\n\nReturn value\nnone\n\nExample\nSetBool(\"level.name\", \"foo\")"
+    },
+    {
+        "scope": "lua",
+        "body": "GetString()",
+        "prefix": "GetString",
+        "description": "Arguments\nkey (string) – Registry key\n\nReturn value\nvalue (string) – String value of registry node or \"\" if not found\n\n\nExample\nlocal name = GetString(\"level.name\")"
+    },
+    {
+        "scope": "lua",
+        "body": "Vec()",
+        "prefix": "Vec",
+        "description": "Arguments\nx (number, optional) – X value\ny (number, optional) – Y value\nz (number, optional) – Z value\n\nReturn value\nvec (table) – New vector\n\n\nExample\n--These are equivalent\nlocal a1 = Vec()\nlocal a2 = {0, 0, 0}\n\n--These are equivalent\nlocal b1 = Vec(0, 1, 0)\nlocal b2 = {0, 1, 0}"
+    },
+    {
+        "scope": "lua",
+        "body": "VecCopy()",
+        "prefix": "VecCopy",
+        "description": "Arguments\norg (table) – A vector\n\nReturn value\nnew (table) – Copy of org vector\n\n\nExample\n--Do this to assign a vector\nlocal right1 = Vec(1, 2, 3)\nlocal right2 = VecCopy(right1)\n\n--Never do this unless you REALLY know what you're doing\nlocal wrong1 = Vec(1, 2, 3)\nlocal wrong2 = wrong1"
+    },
+    {
+        "scope": "lua",
+        "body": "VecLength()",
+        "prefix": "VecLength",
+        "description": "Arguments\nvec (table) – A vector\n\nReturn value\nlength (number) – Length (magnitude) of the vector\n\n\nExample\nlocal v = Vec(1,1,0)\nlocal l = VecLength(v)\n\n--l now equals 1.41421356"
+    },
+    {
+        "scope": "lua",
+        "body": "VecNormalize()",
+        "prefix": "VecNormalize",
+        "description": "Arguments\nvec (table) – A vector\n\nReturn value\nnorm (table) – A vector of length 1.0\n\n\nExample\nlocal v = Vec(0,3,0)\nlocal n = VecNormalize(v)\n\n--n now equals {0,1,0}"
+    },
+    {
+        "scope": "lua",
+        "body": "VecScale()",
+        "prefix": "VecScale",
+        "description": "Arguments\nvec (table) – A vector\nscale (number) – A scale factor\n\nReturn value\nnorm (table) – A scaled version of input vector\n\n\nExample\nlocal v = Vec(1,2,3)\nlocal n = VecScale(v, 2)\n\n--n now equals {2,4,6}"
+    },
+    {
+        "scope": "lua",
+        "body": "VecAdd()",
+        "prefix": "VecAdd",
+        "description": "Arguments\na (table) – Vector\nb (table) – Vector\n\nReturn value\nc (table) – New vector with sum of a and b\n\n\nExample\nlocal a = Vec(1,2,3)\nlocal b = Vec(3,0,0)\nlocal c = VecAdd(a, b)\n\n--c now equals {4,2,3}"
+    },
+    {
+        "scope": "lua",
+        "body": "VecSub()",
+        "prefix": "VecSub",
+        "description": "Arguments\na (table) – Vector\nb (table) – Vector\n\nReturn value\nc (table) – New vector representing a-b\n\n\nExample\nlocal a = Vec(1,2,3)\nlocal b = Vec(3,0,0)\nlocal c = VecSub(a, b)\n\n--c now equals {-2,2,3}"
+    },
+    {
+        "scope": "lua",
+        "body": "VecDot()",
+        "prefix": "VecDot",
+        "description": "Arguments\na (table) – Vector\nb (table) – Vector\n\nReturn value\nc (number) – Dot product of a and b\n\n\nExample\nlocal a = Vec(1,2,3)\nlocal b = Vec(3,1,0)\nlocal c = VecDot(a, b)\n\n--c now equals 5"
+    },
+    {
+        "scope": "lua",
+        "body": "VecCross()",
+        "prefix": "VecCross",
+        "description": "Arguments\na (table) – Vector\nb (table) – Vector\n\nReturn value\nc (table) – Cross product of a and b (also called vector product)\n\n\nExample\nlocal a = Vec(1,0,0)\nlocal b = Vec(0,1,0)\nlocal c = VecCross(a, b)\n\n--c now equals {0,0,1}"
+    },
+    {
+        "scope": "lua",
+        "body": "VecLerp()",
+        "prefix": "VecLerp",
+        "description": "Arguments\na (table) – Vector\nb (table) – Vector\nt (number) – fraction (usually between 0.0 and 1.0)\n\nReturn value\nc (table) – Linearly interpolated vector between a and b, using t\n\n\nExample\nlocal a = Vec(2,0,0)\nlocal b = Vec(0,4,2)\nlocal t = 0.5\n\n--These two are equivalent\nlocal c1 = VecLerp(a, b, t)\nlcoal c2 = VecAdd(VecScale(a, 1-t), VecScale(b, t))\n\n--c1 and c2 now equals {1, 2, 1}"
+    },
+    {
+        "scope": "lua",
+        "body": "Quat()",
+        "prefix": "Quat",
+        "description": "Arguments\nx (number, optional) – X value\ny (number, optional) – Y value\nz (number, optional) – Z value\nw (number, optional) – W value\n\nReturn value\nquat (table) – New quaternion\n\n\nExample\n--These are equivalent\nlocal a1 = Quat()\nlocal a2 = {0, 0, 0, 1}"
+    },
+    {
+        "scope": "lua",
+        "body": "QuatCopy()",
+        "prefix": "QuatCopy",
+        "description": "Arguments\norg (table) – Quaternion\n\nReturn value\nnew (table) – Copy of org quaternion\n\n\nExample\n--Do this to assign a quaternion\nlocal right1 = QuatEuler(0, 90, 0)\nlocal right2 = QuatCopy(right1)\n\n--Never do this unless you REALLY know what you're doing\nlocal wrong1 = QuatEuler(0, 90, 0)\nlocal wrong2 = wrong1"
+    },
+    {
+        "scope": "lua",
+        "body": "QuatAxisAngle()",
+        "prefix": "QuatAxisAngle",
+        "description": "Arguments\naxis (table) – Rotation axis, unit vector\nangle (number) – Rotation angle in degrees\n\nReturn value\nquat (table) – New quaternion\n\n\nExample\n--Create quaternion representing rotation 30 degrees around Y axis\nlocal q = QuatAxisAngle(Vec(0,1,0), 30)"
+    },
+    {
+        "scope": "lua",
+        "body": "QuatEuler()",
+        "prefix": "QuatEuler",
+        "description": "Arguments\nx (number) – Angle around X axis in degrees, sometimes also called roll or bank\ny (number) – Angle around Y axis in degrees, sometimes also called yaw or heading\nz (number) – Angle around Z axis in degrees, sometimes also called pitch or attitude\n\nReturn value\nquat (table) – New quaternion\n\n\nExample\n--Create quaternion representing rotation 30 degrees around Y axis and 25 degrees around Z axis\nlocal q = QuatEuler(0, 30, 25)"
+    },
+    {
+        "scope": "lua",
+        "body": "QuatLookAt()",
+        "prefix": "QuatLookAt",
+        "description": "Arguments\neye (table) – Vector representing the camera location\ntarget (table) – Vector representing the point to look at\n\nReturn value\nquat (table) – New quaternion\n\n\nExample\nlocal eye = Vec(0, 10, 0)\nlocal target = Vec(0, 1, 5)\nlocal rot = QuatLookAt(eye, target)\nSetCameraTransform(Transform(eye, rot))"
+    },
+    {
+        "scope": "lua",
+        "body": "QuatSlerp()",
+        "prefix": "QuatSlerp",
+        "description": "Arguments\na (table) – Quaternion\nb (table) – Quaternion\nt (number) – fraction (usually between 0.0 and 1.0)\n\nReturn value\nc (table) – New quaternion\n\n\nExample\nlocal a = QuatEuler(0, 10, 0)\nlocal b = QuatEuler(0, 0, 45)\n\n--Create quaternion half way between a and b\nlocal q = QuatSlerp(a, b, 0.5)"
+    },
+    {
+        "scope": "lua",
+        "body": "QuatRotateQuat()",
+        "prefix": "QuatRotateQuat",
+        "description": "Arguments\na (table) – Quaternion\nb (table) – Quaternion\n\nReturn value\nc (table) – New quaternion\n\n\nExample\nlocal a = QuatEuler(0, 10, 0)\nlocal b = QuatEuler(0, 0, 45)\nlocal q = QuatRotateQuat(a, b)\n\n--q now represents a rotation first 10 degrees around\n--the Y axis and then 45 degrees around the Z axis."
+    },
+    {
+        "scope": "lua",
+        "body": "Transform()",
+        "prefix": "Transform",
+        "description": "Arguments\npos (table, optional) – Vector representing transform position\nrot (table, optional) – Quaternion representing transform rotation\n\nReturn value\ntransform (table) – New transform\n\n\nExample\n--Create transform located at {0, 0, 0} with no rotation\nlocal t1 = Transform()\n\n--Create transform located at {10, 0, 0} with no rotation\nlocal t2 = Transform(Vec(10, 0,0))\n\n--Create transform located at {10, 0, 0}, rotated 45 degrees around Y axis\nlocal t2 = Transform(Vec(10, 0,0), QuatEuler(0, 45, 0))"
+    },
+    {
+        "scope": "lua",
+        "body": "TransformCopy()",
+        "prefix": "TransformCopy",
+        "description": "Arguments\norg (table) – Transform\n\nReturn value\nnew (table) – Copy of org transform\n\n\nExample\n--Do this to assign a quaternion\nlocal right1 = Transform(Vec(1,0,0), QuatEuler(0, 90, 0))\nlocal right2 = TransformCopy(right1)\n\n--Never do this unless you REALLY know what you're doing\nlocal wrong1 = Transform(Vec(1,0,0), QuatEuler(0, 90, 0))\nlocal wrong2 = wrong1"
+    },
+    {
+        "scope": "lua",
+        "body": "TransformToParentTransform()",
+        "prefix": "TransformToParentTransform",
+        "description": "Arguments\nparent (table) – Transform\nchild (table) – Transform\n\nReturn value\ntransform (table) – New transform\n\n\nExample\nlocal b = GetBodyTransform(body)\nlocal s = GetShapeLocalTransform(shape)\n\n--b represents the location of body in world space\n--s represents the location of shape in body space\n\nlocal w = TransformToParentTransform(b, s)\n\n--w now represents the location of shape in world space"
+    },
+    {
+        "scope": "lua",
+        "body": "TransformToLocalTransform()",
+        "prefix": "TransformToLocalTransform",
+        "description": "Arguments\nparent (table) – Transform\nchild (table) – Transform\n\nReturn value\ntransform (table) – New transform\n\n\nExample\nlocal b = GetBodyTransform(body)\nlocal w = GetShapeWorldTransform(shape)\n\n--b represents the location of body in world space\n--w represents the location of shape in world space\n\nlocal s = TransformToLocalTransform(b, w)\n\n--s now represents the location of shape in body space."
+    },
+    {
+        "scope": "lua",
+        "body": "TransformToParentVec()",
+        "prefix": "TransformToParentVec",
+        "description": "Arguments\nt (table) – Transform\nv (table) – Vector\n\nReturn value\nr (table) – Transformed vector\n\n\nExample\nlocal t = GetBodyTransform(body)\nlocal localUp = Vec(0, 1, 0)\nlocal up = TransformToParentVec(t, localUp)\n\n--up now represents the local body up direction in world space"
+    },
+    {
+        "scope": "lua",
+        "body": "TransformToLocalVec()",
+        "prefix": "TransformToLocalVec",
+        "description": "Arguments\nt (table) – Transform\nv (table) – Vector\n\nReturn value\nr (table) – Transformed vector\n\n\nExample\nlocal t = GetBodyTransform(body)\nlocal worldUp = Vec(0, 1, 0)\nlocal up = TransformToLocalVec(t, worldUp)\n\n--up now represents the world up direction in local body space"
+    },
+    {
+        "scope": "lua",
+        "body": "TransformToParentPoint()",
+        "prefix": "TransformToParentPoint",
+        "description": "Arguments\nt (table) – Transform\np (table) – Vector representing position\n\nReturn value\nr (table) – Transformed position\n\n\nExample\nlocal t = GetBodyTransform(body)\nlocal bodyPoint = Vec(0, 0, -1)\nlocal p = TransformToParentPoint(t, bodyPoint)\n\n--p now represents the local body point {0, 0, -1 } in world space"
+    },
+    {
+        "scope": "lua",
+        "body": "TransformToLocalPoint()",
+        "prefix": "TransformToLocalPoint",
+        "description": "Arguments\nt (table) – Transform\np (table) – Vector representing position\n\nReturn value\nr (table) – Transformed position\n\n\nExample\nlocal t = GetBodyTransform(body)\nlocal worldOrigo = Vec(0, 0, 0)\nlocal p = TransformToLocalPoint(t, worldOrigo)\n\n--p now represents the position of world origo in local body space"
+    },
+    {
+        "scope": "lua",
+        "body": "SetTag()",
+        "prefix": "SetTag",
+        "description": "Arguments\nhandle (number) – Entity handle\ntag (string) – Tag name\nvalue (string, optional) – Tag value\n\nReturn value\nnone\n\nExample\n--Add \"special\" tag to an entity\nSetTag(handle, \"special\")\n\n--Add \"team\" tag to an entity and give it value \"red\"\nSetTag(handle, \"team\", \"red\")"
+    },
+    {
+        "scope": "lua",
+        "body": "RemoveTag()",
+        "prefix": "RemoveTag",
+        "description": "Arguments\nhandle (number) – Entity handle\ntag (string) – Tag name\n\nReturn value\nnone\n\nExample\nRemoveTag(handle, \"special\")"
+    },
+    {
+        "scope": "lua",
+        "body": "HasTag()",
+        "prefix": "HasTag",
+        "description": "Arguments\nhandle (number) – Entity handle\ntag (string) – Tag name\n\nReturn value\nexists (boolean) – Returns true if entity has tag\n\n\nExample\nSetTag(handle, \"special\")\nlocal hasSpecial = HasTag(handle, \"special\") \n-- hasSpecial will be true"
+    },
+    {
+        "scope": "lua",
+        "body": "GetTagValue()",
+        "prefix": "GetTagValue",
+        "description": "Arguments\nhandle (number) – Entity handle\ntag (string) – Tag name\n\nReturn value\nvalue (string) – Returns the tag value, if any. Empty string otherwise.\n\n\nExample\nSetTag(handle, \"special\")\nvalue = GetTagValue(handle, \"special\")\n-- value will be \"\"\n\nSetTag(handle, \"special\", \"foo\")\nvalue = GetTagValue(handle, \"special\")\n-- value will be \"foo\""
+    },
+    {
+        "scope": "lua",
+        "body": "GetDescription()",
+        "prefix": "GetDescription",
+        "description": "Arguments\nhandle (number) – Entity handle\n\nReturn value\ndescription (string) – The description string\n\n\nExample\nlocal desc = GetDescription(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetDescription()",
+        "prefix": "SetDescription",
+        "description": "Arguments\nhandle (number) – Entity handle\ndescription (string) – The description string\n\nReturn value\nnone\n\nExample\nSetDescription(body, \"Target object\")"
+    },
+    {
+        "scope": "lua",
+        "body": "Delete()",
+        "prefix": "Delete",
+        "description": "Arguments\nhandle (number) – Entity handle\n\nReturn value\nnone\n\nExample\nDelete(body)\n--All shapes associated with body will also be removed"
+    },
+    {
+        "scope": "lua",
+        "body": "IsHandleValid()",
+        "prefix": "IsHandleValid",
+        "description": "Arguments\nhandle (number) – Entity handle\n\nReturn value\nexists (boolean) – Returns true if the entity pointed to by handle still exists\n\n\nExample\nvalid = IsHandleValid(body)\n\n--valid is true if body still exists\n\nDelete(body)\nvalid = IsHandleValid(body)\n\n--valid will now be false"
+    },
+    {
+        "scope": "lua",
+        "body": "FindBody()",
+        "prefix": "FindBody",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nhandle (number) – Handle to first body with specified tag or zero if not found\n\n\nExample\n--Search for a body tagged \"target\" in script scope\nlocal target = FindBody(\"target\")\n\n--Search for a body tagged \"escape\" in entire scene\nlocal escape = FindBody(\"escape\", true)"
+    },
+    {
+        "scope": "lua",
+        "body": "FindBodies()",
+        "prefix": "FindBodies",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nlist (table) – Indexed table with handles to all bodies with specified tag\n\n\nExample\n--Search for bodies tagged \"target\" in script scope\nlocal targets = FindBodies(\"target\")\nfor i=1, #targets do\n\tlocal target = targets[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyTransform()",
+        "prefix": "GetBodyTransform",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\ntransform (table) – Transform of the body\n\n\nExample\nlocal t = GetBodyTransform(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetBodyTransform()",
+        "prefix": "SetBodyTransform",
+        "description": "Arguments\nhandle (number) – Body handle\ntransform (table) – Desired transform\n\nReturn value\nnone\n\nExample\n--Move a body 1 meter upwards\nlocal t = GetBodyTransform(body)\nt.pos = VecAdd(t.pos, Vec(0, 1, 0))\nSetBodyTransform(body, t)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyMass()",
+        "prefix": "GetBodyMass",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\nmass (number) – Body mass. Static bodies always return zero mass.\n\n\nExample\nlocal mass = GetBodyMass(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "IsBodyDynamic()",
+        "prefix": "IsBodyDynamic",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\ndynamic (boolean) – Return true if body is dynamic\n\n\nExample\nlocal dynamic = IsBodyDynamic(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetBodyDynamic()",
+        "prefix": "SetBodyDynamic",
+        "description": "Arguments\nhandle (number) – Body handle\ndynamic (boolean) – True for dynamic. False for static.\n\nReturn value\nnone\n\nExample\nSetBodyDynamic(body, false)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetBodyVelocity()",
+        "prefix": "SetBodyVelocity",
+        "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\nvelocity (table) – Vector with linear velocity\n\nReturn value\nnone\n\nExample\nlocal vel = Vec(2,0,0)\nSetBodyVelocity(body, vel)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyVelocity()",
+        "prefix": "GetBodyVelocity",
+        "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\n\nReturn value\nvelocity (table) – Linear velocity as vector\n\n\nExample\nlocal linVel = GetBodyVelocity(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyVelocityAtPos()",
+        "prefix": "GetBodyVelocityAtPos",
+        "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\npos (table) – World space point as vector\n\nReturn value\nvelocity (table) – Linear velocity on body at pos as vector\n\n\nExample\nlocal vel = GetBodyVelocityAtPos(body, pos)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetBodyAngularVelocity()",
+        "prefix": "SetBodyAngularVelocity",
+        "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\nangVel (table) – Vector with angular velocity\n\nReturn value\nnone\n\nExample\nlocal angVel = Vec(2,0,0)\nSetBodyAngularVelocity(body, angVel)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyAngularVelocity()",
+        "prefix": "GetBodyAngularVelocity",
+        "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\n\nReturn value\nangVel (table) – Angular velocity as vector\n\n\nExample\nlocal angVel = GetBodyAngularVelocity(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "IsBodyActive()",
+        "prefix": "IsBodyActive",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\nactive (boolean) – Return true if body is active\n\n\nExample\nif IsBodyActive(body) then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "ApplyBodyImpulse()",
+        "prefix": "ApplyBodyImpulse",
+        "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\nposition (table) – World space position as vector\nvelocity (table) – World space impulse as vector\n\nReturn value\nnone\n\nExample\nlocal pos = Vec(0,1,0)\nlocal imp = Vec(0,0,10)\nApplyBodyImpulse(body, pos, imp)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyShapes()",
+        "prefix": "GetBodyShapes",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\nlist (table) – Indexed table of shape handles\n\n\nExample\nlocal shapes = GetBodyShapes(body)\nfor i=1,#shapes do\n\tlocal shape = shapes[i]\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyVehicle()",
+        "prefix": "GetBodyVehicle",
+        "description": "Arguments\nbody (number) – Body handle\n\nReturn value\nhandle (number) – Get parent vehicle for body, or zero if not part of vehicle\n\n\nExample\nlocal vehicle = GetBodyVehicle(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyBounds()",
+        "prefix": "GetBodyBounds",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\nmin (table) – Vector representing the AABB lower bound\nmax (table) – Vector representing the AABB upper bound\n\n\nExample\nlocal min, max = GetBodyBounds(body)\nlocal boundsSize = VecSub(max, min)\nlocal center = VecLerp(min, max, 0.5)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetBodyCenterOfMass()",
+        "prefix": "GetBodyCenterOfMass",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\npoint (table) – Vector representing local center of mass in body space\n\n\nExample\n--Visualize center of mass on for body\nlocal com = GetBodyCenterOfMass(body)\nlocal worldPoint = TransformToParentPoint(GetBodyTransform(body), com)\nDebugCross(worldPoint)"
+    },
+    {
+        "scope": "lua",
+        "body": "IsBodyVisible()",
+        "prefix": "IsBodyVisible",
+        "description": "Arguments\nhandle (number) – Body handle\nmaxDist (number) – Maximum visible distance\nrejectTransparent (boolean, optional) – See through transparent materials. Default false.\n\nReturn value\nvisible (boolean) – Return true if body is visible\n\n\nExample\nif IsBodyVisible(body, 25) then\n\t--Body is within 25 meters visible to the camera\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "IsBodyBroken()",
+        "prefix": "IsBodyBroken",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\nbroken (boolean) – Return true if body is broken\n\n\nExample\nlocal broken = IsBodyBroken(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "IsBodyJointedToStatic()",
+        "prefix": "IsBodyJointedToStatic",
+        "description": "Arguments\nhandle (number) – Body handle\n\nReturn value\nresult (boolean) – Return true if body is in any way connected to a static body\n\n\nExample\nlocal connectedToStatic = IsBodyJointedToStatic(body)"
+    },
+    {
+        "scope": "lua",
+        "body": "DrawBodyOutline()",
+        "prefix": "DrawBodyOutline",
+        "description": "Arguments\nhandle (number) – Body handle\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number) – Alpha\n\nReturn value\nnone\n\nExample\n--Draw white outline at 50% transparency\nDrawBodyOutline(body, 0.5)\n\n--Draw green outline, fully opaque\nDrawBodyOutline(body, 0, 1, 0, 1)"
+    },
+    {
+        "scope": "lua",
+        "body": "DrawBodyHighlight()",
+        "prefix": "DrawBodyHighlight",
+        "description": "Arguments\nhandle (number) – Body handle\namount (number) – Amount\n\nReturn value\nnone\n\nExample\nDrawBodyHighlight(body, 0.5)"
+    },
+    {
+        "scope": "lua",
+        "body": "FindShape()",
+        "prefix": "FindShape",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nhandle (number) – Handle to first shape with specified tag or zero if not found\n\n\nExample\n--Search for a shape tagged \"mybox\" in script scope\nlocal target = FindShape(\"mybox\")\n\n--Search for a shape tagged \"laserturret\" in entire scene\nlocal escape = FindBody(\"laserturret\", true)"
+    },
+    {
+        "scope": "lua",
+        "body": "FindShapes()",
+        "prefix": "FindShapes",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nlist (table) – Indexed table with handles to all shapes with specified tag\n\n\nExample\n--Search for shapes tagged \"alarmbox\" in script scope\nlocal shapes = FindShapes(\"alarmbox\")\nfor i=1, #shapes do\n\tlocal shape = shapes[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeLocalTransform()",
+        "prefix": "GetShapeLocalTransform",
+        "description": "Arguments\nhandle (number) – Shape handle\n\nReturn value\ntransform (table) – Return shape transform in body space\n\n\nExample\n--Shape transform in body local space\nlocal shapeTransform = GetShapeLocalTransform(shape)\n\n--Body transform in world space\nlocal bodyTransforn = GetBodyTransform(GetShapeBody(shape))\n\n--Shape transform in world space\nlocal worldTranform = TransformToParentTransform(bodyTransform, shapeTransform)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetShapeLocalTransform()",
+        "prefix": "SetShapeLocalTransform",
+        "description": "Arguments\nhandle (number) – Shape handle\ntransform (table) – Shape transform in body space\n\nReturn value\nnone\n\nExample\nlocal transform = Transform(Vec(0, 1, 0), QuatEuler(0, 90, 0))\nSetShapeLocalTransform(shape, transform)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeWorldTransform()",
+        "prefix": "GetShapeWorldTransform",
+        "description": "Arguments\nhandle (number) – Shape handle\n\nReturn value\ntransform (table) – Return shape transform in world space\n\n\nExample\nlocal worldTransform = GetShapeWorldTransform(shape)\n\n--This is equivalent to\nlocal shapeTransform = GetShapeLocalTransform(shape)\nlocal bodyTransforn = GetBodyTransform(GetShapeBody(shape))\nworldTranform = TransformToParentTransform(bodyTransform, shapeTransform)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeBody()",
+        "prefix": "GetShapeBody",
+        "description": "Arguments\nhandle (number) – Shape handle\n\nReturn value\nhandle (number) – Body handle\n\n\nExample\nlocal body = GetShapeBody(shape)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeJoints()",
+        "prefix": "GetShapeJoints",
+        "description": "Arguments\nshape (number) – Shape handle\n\nReturn value\nlist (table) – Indexed table with joints connected to shape\n\n\nExample\nlocal hinges = GetShapeJoints(door)\nfor i=1, #hinges do\n\tlocal joint = hinges[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeLights()",
+        "prefix": "GetShapeLights",
+        "description": "Arguments\nshape (number) – Shape handle\n\nReturn value\nlist (table) – Indexed table of lights owned by shape\n\n\nExample\nlocal lights = GetShapeLights(shape)\nfor i=1, #lights do\n\tlocal light = lights[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeBounds()",
+        "prefix": "GetShapeBounds",
+        "description": "Arguments\nhandle (number) – Shape handle\n\nReturn value\nmin (table) – Vector representing the AABB lower bound\nmax (table) – Vector representing the AABB upper bound\n\n\nExample\nlocal min, max = GetShapeBounds(shape)\nlocal boundsSize = VecSub(max, min)\nlocal center = VecLerp(min, max, 0.5)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetShapeEmissiveScale()",
+        "prefix": "SetShapeEmissiveScale",
+        "description": "Arguments\nhandle (number) – Shape handle\nscale (number) – Scale factor for emissiveness\n\nReturn value\nnone\n\nExample\n--Pulsate emissiveness and light intensity for shape\nlocal scale = math.sin(GetTime())*0.5 + 0.5\nSetShapeEmissiveScale(shape, scale)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeMaterialAtPosition()",
+        "prefix": "GetShapeMaterialAtPosition",
+        "description": "Arguments\nhandle (number) – Shape handle\npos (table) – Position in world space\n\nReturn value\ntype (string) – Material type\nr (number) – Red\ng (number) – Green\nb (number) – Blue\na (number) – Alpha\n\n\nExample\nlocal hit, dist, normal, shape = QueryRaycast(pos, dir, 10)\nif hit then\n\tlocal hitPoint = VecAdd(pos, VecScale(dir, dist))\n\tlocal mat = GetShapeMaterialAtPosition(shape, hitPoint)\n\tDebugPrint(\"Raycast hit voxel made out of \" .. mat)\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeSize()",
+        "prefix": "GetShapeSize",
+        "description": "Arguments\nhandle (number) – Shape handle\n\nReturn value\nxsize (number) – Size in voxels along x axis\nysize (number) – Size in voxels along y axis\nzsize (number) – Size in voxels along z axis\n\n\nExample\nlocal x, y, z = GetShapeSize(shape)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetShapeVoxelCount()",
+        "prefix": "GetShapeVoxelCount",
+        "description": "Arguments\nhandle (number) – Shape handle\n\nReturn value\ncount (number) – Number of voxels in shape\n\n\nExample\nlocal voxelCount = GetShapeVoxelCount(shape)"
+    },
+    {
+        "scope": "lua",
+        "body": "IsShapeVisible()",
+        "prefix": "IsShapeVisible",
+        "description": "Arguments\nhandle (number) – Shape handle\nmaxDist (number) – Maximum visible distance\nrejectTransparent (boolean, optional) – See through transparent materials. Default false.\n\nReturn value\nvisible (boolean) – Return true if shape is visible\n\n\nExample\nif IsShapeVisible(shape, 25) then\n\t--Shape is within 25 meters visible to the camera\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "IsShapeBroken()",
+        "prefix": "IsShapeBroken",
+        "description": "Arguments\nhandle (number) – Shape handle\n\nReturn value\nbroken (boolean) – Return true if shape is broken\n\n\nExample\nlocal broken = IsShapeBroken(shape)"
+    },
+    {
+        "scope": "lua",
+        "body": "DrawShapeOutline()",
+        "prefix": "DrawShapeOutline",
+        "description": "Arguments\nhandle (number) – Shape handle\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number) – Alpha\n\nReturn value\nnone\n\nExample\n--Draw white outline at 50% transparency\nDrawShapeOutline(shape, 0.5)\n\n--Draw green outline, fully opaque\nDrawShapeOutline(shape, 0, 1, 0, 1)"
+    },
+    {
+        "scope": "lua",
+        "body": "DrawShapeHighlight()",
+        "prefix": "DrawShapeHighlight",
+        "description": "Arguments\nhandle (number) – Shape handle\namount (number) – Amount\n\nReturn value\nnone\n\nExample\nDrawShapeHighlight(shape, 0.5)"
+    },
+    {
+        "scope": "lua",
+        "body": "FindLocation()",
+        "prefix": "FindLocation",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nhandle (number) – Handle to first location with specified tag or zero if not found\n\n\nExample\nlocal loc = FindLocation(\"start\")"
+    },
+    {
+        "scope": "lua",
+        "body": "FindLocations()",
+        "prefix": "FindLocations",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nlist (table) – Indexed table with handles to all locations with specified tag\n\n\nExample\n--Search for locations tagged \"waypoint\" in script scope\nlocal locations = FindLocations(\"waypoint\")\nfor i=1, #locs do\n\tlocal locs = locations[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetLocationTransform()",
+        "prefix": "GetLocationTransform",
+        "description": "Arguments\nhandle (number) – Location handle\n\nReturn value\ntransform (table) – Transform of the location\n\n\nExample\nlocal t = GetLocationTransform(loc)"
+    },
+    {
+        "scope": "lua",
+        "body": "FindJoint()",
+        "prefix": "FindJoint",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nhandle (number) – Handle to first joint with specified tag or zero if not found\n\n\nExample\nlocal joint = FindLocation(\"doorhinge\")"
+    },
+    {
+        "scope": "lua",
+        "body": "FindJoints()",
+        "prefix": "FindJoints",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nlist (table) – Indexed table with handles to all joints with specified tag\n\n\nExample\n--Search for locations tagged \"doorhinge\" in script scope\nlocal hinges = FindLocations(\"doorhinge\")\nfor i=1, #hinges do\n\tlocal joint = hinges[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "IsJointBroken()",
+        "prefix": "IsJointBroken",
+        "description": "Arguments\njoint (number) – Joint handle\n\nReturn value\nbroken (boolean) – True if joint is broken\n\n\nExample\nlocal broken = IsJointBroken(joint)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetJointType()",
+        "prefix": "GetJointType",
+        "description": "Arguments\njoint (number) – Joint handle\n\nReturn value\ntype (string) – Joint type\n\n\nExample\nif GetJointType(joint) == \"rope\" then\n\t--Joint is rope\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetJointOtherShape()",
+        "prefix": "GetJointOtherShape",
+        "description": "Arguments\njoint (number) – Joint handle\nshape (number) – Shape handle\n\nReturn value\nother (number) – Other shape handle\n\n\nExample\n--joint is connected to a and b\n\notherShape = GetJointOtherShape(joint, a)\n--otherShape is now b\n\notherShape = GetJointOtherShape(joint, b)\n--otherShape is now a"
+    },
+    {
+        "scope": "lua",
+        "body": "SetJointMotor()",
+        "prefix": "SetJointMotor",
+        "description": "Arguments\njoint (number) – Joint handle\nvelocity (number) – Desired velocity\nstrength (number, optional) – Desired strength. Default is infinite. Zero to disable.\n\nReturn value\nnone\n\nExample\n--Set motor speed to 0.5 radians per second\nSetJointMotor(hinge, 0.5)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetJointMotorTarget()",
+        "prefix": "SetJointMotorTarget",
+        "description": "Arguments\njoint (number) – Joint handle\ntarget (number) – Desired movement target\nmaxVel (number, optional) – Maximum velocity to reach target. Default is infinite.\nstrength (number, optional) – Desired strength. Default is infinite. Zero to disable.\n\nReturn value\nnone\n\nExample\n--Make joint reach a 45 degree angle, going at a maximum of 3 radians per second\nSetJointMotorTarget(hinge, 45, 3)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetJointLimits()",
+        "prefix": "GetJointLimits",
+        "description": "Arguments\njoint (number) – Joint handle\n\nReturn value\nmin (number) – Minimum joint limit (angle or distance)\nmax (number) – Maximum joint limit (angle or distance)\n\n\nExample\nlocal min, max = GetJointLimits(hinge)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetJointMovement()",
+        "prefix": "GetJointMovement",
+        "description": "Arguments\njoint (number) – Joint handle\n\nReturn value\nmovement (number) – Current joint position or angle\n\n\nExample\nlocal current = GetJointMovement(hinge)"
+    },
+    {
+        "scope": "lua",
+        "body": "FindLight()",
+        "prefix": "FindLight",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nhandle (number) – Handle to first light with specified tag or zero if not found\n\n\nExample\nlocal light = FindLight(\"main\")"
+    },
+    {
+        "scope": "lua",
+        "body": "FindLights()",
+        "prefix": "FindLights",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nlist (table) – Indexed table with handles to all lights with specified tag\n\n\nExample\n--Search for lights tagged \"main\" in script scope\nlocal lights = FindLights(\"main\")\nfor i=1, #lights do\n\tlocal light = lights[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "SetLightEnabled()",
+        "prefix": "SetLightEnabled",
+        "description": "Arguments\nhandle (number) – Light handle\nenabled (boolean) – Set to true if light should be enabled\n\nReturn value\nnone\n\nExample\nSetLightEnabled(light, false)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetLightColor()",
+        "prefix": "SetLightColor",
+        "description": "Arguments\nhandle (number) – Light handle\nr (number) – Red value\ng (number) – Green value\nb (number) – Blue value\n\nReturn value\nnone\n\nExample\n--Set light color to yellow\nSetLightColor(light, 1, 1, 0)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetLightIntensity()",
+        "prefix": "SetLightIntensity",
+        "description": "Arguments\nhandle (number) – Light handle\nintensity (number) – Desired intensity of the light\n\nReturn value\nnone\n\nExample\n--Pulsate light\nSetLightIntensity(light, math.sin(GetTime())*0.5 + 1.0)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetLightTransform()",
+        "prefix": "GetLightTransform",
+        "description": "Arguments\nhandle (number) – Light handle\n\nReturn value\ntransform (table) – World space light transform\n\n\nExample\nlocal pos = GetLightTransform(light).pos"
+    },
+    {
+        "scope": "lua",
+        "body": "GetLightShape()",
+        "prefix": "GetLightShape",
+        "description": "Arguments\nhandle (number) – Light handle\n\nReturn value\nhandle (number) – Shape handle or zero if not attached to shape\n\n\nExample\nlocal shape = GetLightShape(light)"
+    },
+    {
+        "scope": "lua",
+        "body": "IsPointAffectedByLight()",
+        "prefix": "IsPointAffectedByLight",
+        "description": "Arguments\nhandle (number) – Light handle\npoint (table) – World space point as vector\n\nReturn value\naffected (boolean) – Return true if point is in light cone and range\n\n\nExample\nlocal point = Vec(0, 10, 0)\nlocal affected = IsPointAffectedByLight(light, point)"
+    },
+    {
+        "scope": "lua",
+        "body": "FindTrigger()",
+        "prefix": "FindTrigger",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nhandle (number) – Handle to first trigger with specified tag or zero if not found\n\n\nExample\nlocal goal = FindTrigger(\"goal\")"
+    },
+    {
+        "scope": "lua",
+        "body": "FindTriggers()",
+        "prefix": "FindTriggers",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nlist (table) – Indexed table with handles to all triggers with specified tag\n\n\nExample\n--Find triggers tagged \"toxic\" in script scope\nlocal triggers = FindTriggers(\"toxic\")\nfor i=1, #triggers do\n\tlocal trigger = triggers[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetTriggerTransform()",
+        "prefix": "GetTriggerTransform",
+        "description": "Arguments\nhandle (number) – Trigger handle\n\nReturn value\ntransform (table) – Current trigger transform in world space\n\n\nExample\nlocal t = GetTriggerTransform(trigger)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetTriggerTransform()",
+        "prefix": "SetTriggerTransform",
+        "description": "Arguments\nhandle (number) – Trigger handle\ntransform (table) – Desired trigger transform in world space\n\nReturn value\nnone\n\nExample\nlocal t = Transform(Vec(0, 1, 0), QuatEuler(0, 90, 0))\nSetTriggerTransform(trigger, t)"
+    },
+    {
+        "scope": "lua",
+        "body": "IsBodyInTrigger()",
+        "prefix": "IsBodyInTrigger",
+        "description": "Arguments\ntrigger (number) – Trigger handle\nbody (number) – Body handle\n\nReturn value\nnone\n\nExample\nif IsBodyInTrigger(trigger, body) then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "IsVehicleInTrigger()",
+        "prefix": "IsVehicleInTrigger",
+        "description": "Arguments\ntrigger (number) – Trigger handle\nvehicle (number) – Vehicle handle\n\nReturn value\nnone\n\nExample\nif IsVehicleInTrigger(trigger, vehicle) then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "IsShapeInTrigger()",
+        "prefix": "IsShapeInTrigger",
+        "description": "Arguments\ntrigger (number) – Trigger handle\nshape (number) – Shape handle\n\nReturn value\nnone\n\nExample\nif IsShapeInTrigger(trigger, shape) then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "IsPointInTrigger()",
+        "prefix": "IsPointInTrigger",
+        "description": "Arguments\ntrigger (number) – Trigger handle\npoint (table) – Word space point as vector\n\nReturn value\nnone\n\nExample\nlocal p = Vec(0, 10, 0)\nif IsPointInTrigger(trigger, p) then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "IsTriggerEmpty()",
+        "prefix": "IsTriggerEmpty",
+        "description": "Arguments\nhandle (number) – Trigger handle\ndemolision (boolean, optional) – If true, small debris and vehicles are ignored\n\nReturn value\nempty (boolean) – True if trigger is empty\nmaxpoint (table) – World space point of highest point (largest Y coordinate) if not empty\n\n\nExample\nlocal empty, highPoint = IsTriggerEmpty(trigger)\nif not empty then\n\t--highPoint[2] is the tallest point in trigger\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "FindScreen()",
+        "prefix": "FindScreen",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nhandle (number) – Handle to first screen with specified tag or zero if not found\n\n\nExample\nlocal screen = FindTrigger(\"tv\")"
+    },
+    {
+        "scope": "lua",
+        "body": "FindScreens()",
+        "prefix": "FindScreens",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nlist (table) – Indexed table with handles to all screens with specified tag\n\n\nExample\n--Find screens tagged \"tv\" in script scope\nlocal screens = FindScreens(\"tv\")\nfor i=1, #screens do\n\tlocal screen = screens[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "SetScreenEnabled()",
+        "prefix": "SetScreenEnabled",
+        "description": "Arguments\nscreen (number) – Screen handle\nenabled (boolean) – True if screen should be enabled\n\nReturn value\nnone\n\nExample\nSetScreenEnabled(screen, true)"
+    },
+    {
+        "scope": "lua",
+        "body": "IsScreenEnabled()",
+        "prefix": "IsScreenEnabled",
+        "description": "Arguments\nscreen (number) – Screen handle\n\nReturn value\nenabled (boolean) – True if screen is enabled\n\n\nExample\nlocal b = IsScreenEnabled(screen)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetScreenShape()",
+        "prefix": "GetScreenShape",
+        "description": "Arguments\nscreen (number) – Screen handle\n\nReturn value\nshape (number) – Shape handle or zero if none\n\n\nExample\nlocal shape = GetScreenShape(screen)"
+    },
+    {
+        "scope": "lua",
+        "body": "FindVehicle()",
+        "prefix": "FindVehicle",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nhandle (number) – Handle to first vehicle with specified tag or zero if not found\n\n\nExample\nlocal vehicle = FindVehicle(\"mycar\")"
+    },
+    {
+        "scope": "lua",
+        "body": "FindVehicles()",
+        "prefix": "FindVehicles",
+        "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\nReturn value\nlist (table) – Indexed table with handles to all vehicles with specified tag\n\n\nExample\n--Find all vehicles in level tagged \"boat\"\nlocal boats = FindVehicles(\"boat\")\nfor i=1, #boats do\n\tlocal boat = boats[i]\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetVehicleTransform()",
+        "prefix": "GetVehicleTransform",
+        "description": "Arguments\nvehicle (number) – Vehicle handle\n\nReturn value\ntransform (table) – Transform of vehicle\n\n\nExample\nlocal t = GetVehicleTransform(vehicle)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetVehicleBody()",
+        "prefix": "GetVehicleBody",
+        "description": "Arguments\nvehicle (number) – Vehicle handle\n\nReturn value\nbody (number) – Main body of vehicle\n\n\nExample\nlocal body = GetVehicleBody(vehicle)\nif IsBodyBroken(body) then\n--Vehicle body is broken\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetVehicleHealth()",
+        "prefix": "GetVehicleHealth",
+        "description": "Arguments\nvehicle (number) – Vehicle handle\n\nReturn value\nhealth (number) – Vehicle health (zero to one)\n\n\nExample\nlocal health = GetVehicleHealth(vehicle)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetVehicleDriverPos()",
+        "prefix": "GetVehicleDriverPos",
+        "description": "Arguments\nvehicle (number) – Vehicle handle\n\nReturn value\npos (table) – Driver position as vector in vehicle space\n\n\nExample\nlocal driverPos = GetVehicleDriverPos(vehicle)\nlocal t = GetVehicleTransform(vehicle)\nlocal worldPos = TransformToParentPoint(t, driverPos)"
+    },
+    {
+        "scope": "lua",
+        "body": "DriveVehicle()",
+        "prefix": "DriveVehicle",
+        "description": "Arguments\nvehicle (number) – Vehicle handle\ndrive (number) – Reverse/forward control -1 to 1\nsteering (number) – Left/right control -1 to 1\nhandbrake (boolean) – Handbrake control\n\nReturn value\nnone\n\nExample\nfunction tick()\n\t--Drive mycar forwards\n\tlocal v = FindVehicle(\"mycar\")\n\tDriveVehicle(v, 1, 0, false)\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerPos()",
+        "prefix": "GetPlayerPos",
+        "description": "Arguments\nnone\nReturn value\nposition (table) – Player center position\n\n\nExample\nlocal p = GetPlayerPos()\n\n--This is equivalent to\np = VecAdd(GetPlayerTransform().pos, Vec(0,1,0))"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerTransform()",
+        "prefix": "GetPlayerTransform",
+        "description": "Arguments\nnone\nReturn value\ntransform (table) – Current player transform\n\n\nExample\nlocal t = GetPlayerTransform()"
+    },
+    {
+        "scope": "lua",
+        "body": "SetPlayerTransform()",
+        "prefix": "SetPlayerTransform",
+        "description": "Arguments\ntransform (table) – Desired player transform\n\nReturn value\nnone\n\nExample\nlocal t = Transform(Vec(10, 0, 0), QuatEuler(0, 90, 0))\nSetPlayerTransform(t)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerCameraTransform()",
+        "prefix": "GetPlayerCameraTransform",
+        "description": "Arguments\nnone\nReturn value\ntransform (table) – Current player camera transform\n\n\nExample\nlocal t = GetPlayerCameraTransform()"
+    },
+    {
+        "scope": "lua",
+        "body": "SetPlayerSpawnTransform()",
+        "prefix": "SetPlayerSpawnTransform",
+        "description": "Arguments\ntransform (table) – Desired player spawn transform\n\nReturn value\nnone\n\nExample\nlocal t = Transform(Vec(10, 0, 0), QuatEuler(0, 90, 0))\nSetPlayerSpawnTransform(t)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerVelocity()",
+        "prefix": "GetPlayerVelocity",
+        "description": "Arguments\nnone\nReturn value\nvelocity (table) – Player velocity in world space as vector\n\n\nExample\nlocal vel = GetPlayerVelocity()"
+    },
+    {
+        "scope": "lua",
+        "body": "SetPlayerVehicle()",
+        "prefix": "SetPlayerVehicle",
+        "description": "Arguments\nvehicle (value) – Handle to vehicle or zero to not drive.\n\nReturn value\nnone\n\nExample\nlocal car = FindVehicle(\"mycar\")\nSetPlayerVehicle(car)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetPlayerVelocity()",
+        "prefix": "SetPlayerVelocity",
+        "description": "Arguments\nvelocity (table) – Player velocity in world space as vector\n\nReturn value\nnone\n\nExample\nSetPlayerVelocity(Vec(0, 5, 0))"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerVehicle()",
+        "prefix": "GetPlayerVehicle",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Current vehicle handle, or zero if not in vehicle\n\n\nExample\nlocal vehicle = GetPlayerVehicle()\nif vehicle ~= 0 then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerGrabShape()",
+        "prefix": "GetPlayerGrabShape",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to grabbed shape or zero if not grabbing.\n\n\nExample\nlocal shape = GetPlayerGrabShape()\nif shape ~= 0 then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerGrabBody()",
+        "prefix": "GetPlayerGrabBody",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to grabbed body or zero if not grabbing.\n\n\nExample\nlocal body = GetPlayerGrabBody()\nif body ~= 0 then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerPickShape()",
+        "prefix": "GetPlayerPickShape",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to picked shape or zero if nothing is picked\n\n\nExample\nlocal shape = GetPlayerPickShape()\nif shape ~= 0 then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerPickBody()",
+        "prefix": "GetPlayerPickBody",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to picked body or zero if nothing is picked\n\n\nExample\nlocal body = GetPlayerPickBody()\nif body ~= 0 then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerInteractShape()",
+        "prefix": "GetPlayerInteractShape",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to interactable shape or zero\n\n\nExample\nlocal shape = GetPlayerInteractShape()\nif shape ~= 0 then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerInteractBody()",
+        "prefix": "GetPlayerInteractBody",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to interactable body or zero\n\n\nExample\nlocal body = GetPlayerInteractBody()\nif body ~= 0 then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "SetPlayerScreen()",
+        "prefix": "SetPlayerScreen",
+        "description": "Arguments\nhandle (number) – Handle to screen or zero for no screen\n\nReturn value\nnone\n\nExample\n--Interact with screen\nSetPlayerScreen(screen)\n\n--Do not interact with screen\nSetPlayerScreen(0)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerScreen()",
+        "prefix": "GetPlayerScreen",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to interacted screen or zero if none\n\n\nExample\n--Interact with screen\nlocal screen = GetPlayerScreen()"
+    },
+    {
+        "scope": "lua",
+        "body": "SetPlayerHealth()",
+        "prefix": "SetPlayerHealth",
+        "description": "Arguments\nhealth (number) – Set player health (between zero and one)\n\nReturn value\nnone\n\nExample\nSetPlayerHealth(0.5)"
+    },
+    {
+        "scope": "lua",
+        "body": "GetPlayerHealth()",
+        "prefix": "GetPlayerHealth",
+        "description": "Arguments\nnone\nReturn value\nhealth (number) – Current player health\n\n\nExample\nlocal health = GetPlayerHealth()"
+    },
+    {
+        "scope": "lua",
+        "body": "RespawnPlayer()",
+        "prefix": "RespawnPlayer",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nRespawnPlayer()"
+    },
+    {
+        "scope": "lua",
+        "body": "RegisterTool()",
+        "prefix": "RegisterTool",
+        "description": "Arguments\nid (string) – Tool unique identifier\nname (string) – Tool name to show in hud\nfile (string) – Path to vox file\n\nReturn value\nnone\n\nExample\nfunction init()\n\tRegisterTool(\"lasergun\", \"Laser Gun\", \"MOD/vox/lasergun.vox\")\n\tSetBool(\"game.tool.lasergun.enabled\", true)\nend\n\nfunction tick()\n\tif GetString(\"game.player.tool\") == \"lasergun\" then\n\t\t--Tool is selected. Tool logic goes here.\n\tend\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetToolBody()",
+        "prefix": "GetToolBody",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to currently visible tool body or zero if none\n\n\nExample\nlocal toolBody = GetToolBody()\nif toolBody~=0 then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "SetToolTransform()",
+        "prefix": "SetToolTransform",
+        "description": "Arguments\ntransform (table) – Tool body transform\n\nReturn value\nnone\n\nExample\n--Offset the tool half a meter to the right\nlocal offset = Transform(Vec(0.5, 0, 0))\nSetToolTransform(offset)"
+    },
+    {
+        "scope": "lua",
+        "body": "LoadSound()",
+        "prefix": "LoadSound",
+        "description": "Arguments\npath (string) – Path to ogg sound file\n\nReturn value\nhandle (number) – Sound handle\n\n\nExample\nlocal snd = LoadSound(\"beep.ogg\")"
+    },
+    {
+        "scope": "lua",
+        "body": "LoadLoop()",
+        "prefix": "LoadLoop",
+        "description": "Arguments\npath (string) – Path to ogg sound file\n\nReturn value\nhandle (number) – Loop handle\n\n\nExample\nlocal loop = LoadLoop(\"siren.ogg\")"
+    },
+    {
+        "scope": "lua",
+        "body": "PlaySound()",
+        "prefix": "PlaySound",
+        "description": "Arguments\nhandle (number) – Sound handle\npos (table, optional) – World position as vector. Default is player position.\nvolume (number, optional) – Playback volume. Default is 1.0\n\nReturn value\nnone\n\nExample\nfunction init()\n\tsnd = LoadSound(\"beep.ogg\")\nend\n\nfunction tick()\n\tif trigSound then\n\t\tlocal pos = Vec(100, 0, 0)\n\t\tPlaySound(snd, pos, 0.5)\n\tend\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "PlayLoop()",
+        "prefix": "PlayLoop",
+        "description": "Arguments\nhandle (number) – Loop handle\npos (table, optional) – World position as vector. Default is player position.\nvolume (number, optional) – Playback volume. Default is 1.0\n\nReturn value\nnone\n\nExample\nfunction init()\n\tloop = LoadLoop(\"siren.ogg\")\nend\n\nfunction tick()\n\tlocal pos = Vec(100, 0, 0)\n\tPlayLoop(loop, pos, 0.5)\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "PlayMusic()",
+        "prefix": "PlayMusic",
+        "description": "Arguments\npath (string) – Music path\n\nReturn value\nnone\n\nExample\nPlayMusic(\"MOD/music/background.ogg\")"
+    },
+    {
+        "scope": "lua",
+        "body": "StopMusic()",
+        "prefix": "StopMusic",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nStopMusic()"
+    },
+    {
+        "scope": "lua",
+        "body": "LoadSprite()",
+        "prefix": "LoadSprite",
+        "description": "Arguments\npath (string) – Path to sprite. Must be PNG or JPG format.\n\nReturn value\nhandle (number) – Sprite handle\n\n\nExample\nfunction init()\n\tarrow = LoadSprite(\"arrow.png\")\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "DrawSprite()",
+        "prefix": "DrawSprite",
+        "description": "Arguments\nhandle (number) – Sprite handle\ntransform (table) – Transform\nwidth (number) – Width in meters\nheight (number) – Height in meters\nr (number) – Red color\ng (number) – Green color\nb (number) – Blue color\na (number) – Alpha\ndepthTest (boolean, optional) – Depth test enabled. Default false.\nadditive (boolean, optional) – Additive blending enabled. Default false.\n\nReturn value\nnone\n\nExample\nfunction init()\n\tarrow = LoadSprite(\"arrow.png\")\nend\n\nfunction tick()\n\t--Draw sprite using transform\n\t--Size is two meters in width and height\n\t--Color is white, fully opaue\n\tlocal t = Transform(Vec(0, 10, 0), QuatEuler(0, GetTime(), 0))\n\tDrawSprite(arrow, t, 2, 2, 1, 1, 1, 1)\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "QueryRequire()",
+        "prefix": "QueryRequire",
+        "description": "Arguments\nlayers (string) – Space separate list of layers\n\nReturn value\nnone\n\nExample\n--Raycast dynamic, physical objects above debris threshold, but not specific vehicle\nQueryRequire(\"physical dynamic large\")\nQueryRejectVehicle(vehicle)\nQueryRaycast(...)"
+    },
+    {
+        "scope": "lua",
+        "body": "QueryRejectVehicle()",
+        "prefix": "QueryRejectVehicle",
+        "description": "Arguments\nvehicle (number) – Vehicle handle\n\nReturn value\nnone\n\nExample\n--Do not include vehicle in next raycast\nQueryRejectVehicle(vehicle)\nQueryRaycast(...)"
+    },
+    {
+        "scope": "lua",
+        "body": "QueryRejectBody()",
+        "prefix": "QueryRejectBody",
+        "description": "Arguments\nbody (number) – Body handle\n\nReturn value\nnone\n\nExample\n--Do not include body in next raycast\nQueryRejectBody(body)\nQueryRaycast(...)"
+    },
+    {
+        "scope": "lua",
+        "body": "QueryRejectShape()",
+        "prefix": "QueryRejectShape",
+        "description": "Arguments\nshape (number) – Shape handle\n\nReturn value\nnone\n\nExample\n--Do not include shape in next raycast\nQueryRejectShape(shape)\nQueryRaycast(...)"
+    },
+    {
+        "scope": "lua",
+        "body": "QueryRaycast()",
+        "prefix": "QueryRaycast",
+        "description": "Arguments\norigin (table) – Raycast origin as world space vector\ndirection (table) – Unit length raycast direction as world space vector\nmaxDist (number) – Raycast maximum distance. Keep this as low as possible for good performance.\nradius (number, optional) – Raycast thickness. Default zero.\nrejectTransparent (boolean, optional) – Raycast through transparent materials. Default false.\n\nReturn value\nhit (boolean) – True if raycast hit something\ndist (number) – Hit distance from origin\nnormal (table) – World space normal at hit point\nshape (number) – Handle to hit shape\n\n\nExample\n--Raycast from a high point straight downwards, excluding a specific vehicle\nQueryRejectVehicle(vehicle)\nlocal hit, d = QueryRaycast(Vec(0, 100, 0), Vec(0, -1, 0), 100)\nif hit then\n\t...hit something at distance d\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "QueryClosestPoint()",
+        "prefix": "QueryClosestPoint",
+        "description": "Arguments\norigin (table) – World space point\nmaxDist (number) – Maximum distance. Keep this as low as possible for good performance.\n\nReturn value\nhit (boolean) – True if a point was found\npoint (table) – World space closest point\nnormal (table) – World space normal at closest point\nshape (number) – Handle to closest shape\n\n\nExample\n--Find closest point within 10 meters of {0, 5, 0}, excluding any point on myVehicle\nQueryRejectVehicle(myVehicle)\nlocal hit, p, n, s = QueryClosestPoint(Vec(0, 5, 0), 10)\nif hit then\n\t--Point p of shape s is closest\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "QueryAabbShapes()",
+        "prefix": "QueryAabbShapes",
+        "description": "Arguments\nmin (table) – Aabb minimum point\nmax (table) – Aabb maximum point\n\nReturn value\nlist (table) – Indexed table with handles to all shapes in the aabb\n\n\nExample\nlocal list = QueryAabbShapes(Vec(0, 0, 0), Vec(10, 10, 10))\nfor i=1, #list do\n\tlocal shape = list[i]\n\t..\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "QueryAabbBodies()",
+        "prefix": "QueryAabbBodies",
+        "description": "Arguments\nmin (table) – Aabb minimum point\nmax (table) – Aabb maximum point\n\nReturn value\nlist (table) – Indexed table with handles to all bodies in the aabb\n\n\nExample\nlocal list = QueryAabbBodies(Vec(0, 0, 0), Vec(10, 10, 10))\nfor i=1, #list do\n\tlocal body = list[i]\n\t..\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "GetLastSound()",
+        "prefix": "GetLastSound",
+        "description": "Arguments\nnone\nReturn value\nvolume (number) – Volume of loudest sound played last frame\nposition (table) – World position of loudest sound played last frame\n\n\nExample\nlocal vol, pos = GetLastSound()"
+    },
+    {
+        "scope": "lua",
+        "body": "IsPointInWater()",
+        "prefix": "IsPointInWater",
+        "description": "Arguments\npoint (table) – World point as vector\n\nReturn value\ninWater (boolean) – True if point is in water\ndepth (number) – Depth of point into water, or zero if not in water\n\n\nExample\nlocal wet, d = IsPointInWater(Vec(10, 0, 0))\nif wet then\n\t...point d meters into water\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "Shoot()",
+        "prefix": "Shoot",
+        "description": "Arguments\norigin (table) – Origin in world space as vector\ndirection (table) – Unit length direction as world space vector\ntype (number, optional) – 0 is regular bullet (default) and 1 is rocket\n\nReturn value\nnone\n\nExample\nShoot(Vec(0, 10, 0), Vec(0, 0, 1))"
+    },
+    {
+        "scope": "lua",
+        "body": "MakeHole()",
+        "prefix": "MakeHole",
+        "description": "Arguments\nposition (table) – Hole center point\nr0 (number) – Hole radius for soft materials\nr1 (number, optional) – Hole radius for medium materials. May not be bigger than r0. Default zero.\nr2 (number, optional) – Hole radius for hard materials. May not be bigger than r1. Default zero.\nsilent (boolean, optional) – Make hole without playing any break sounds.\n\nReturn value\nnone\n\nExample\nMakeHole(pos, 1.2, 1.0)"
+    },
+    {
+        "scope": "lua",
+        "body": "Explosion()",
+        "prefix": "Explosion",
+        "description": "Arguments\npos (table) – Position in world space as vector\nsize (number) – Explosion size from 0.5 to 4.0\n\nReturn value\nnone\n\nExample\nExplosion(Vec(0, 10, 0), 1)"
+    },
+    {
+        "scope": "lua",
+        "body": "SpawnParticle()",
+        "prefix": "SpawnParticle",
+        "description": "Arguments\ntype (string) – Type of particle: \"smoke\", \"darksmoke\", \"fire\" or \"water\"\norigin (table) – Origon in world space as vector\nvelocity (table) – Velocity in world space as vector (m/s)\nsize (number) – Size of particle (meters)\nlife (number) – Lifetime of particle (seconds)\n\nReturn value\nnone\n\nExample\nSpawnParticle(\"smoke\", Vec(0, 10, 0), Vec(0, 1, 0), 2, 5)"
+    },
+    {
+        "scope": "lua",
+        "body": "SpawnFire()",
+        "prefix": "SpawnFire",
+        "description": "Arguments\npos (table) – Position in world space as vector\n\nReturn value\nnone\n\nExample\nSpawnFire(Vec(0, 10, 0))"
+    },
+    {
+        "scope": "lua",
+        "body": "GetFireCount()",
+        "prefix": "GetFireCount",
+        "description": "Arguments\nnone\nReturn value\ncount (number) – Number of active fires in level\n\n\nExample\nlocal c = GetFireCount()"
+    },
+    {
+        "scope": "lua",
+        "body": "GetCameraTransform()",
+        "prefix": "GetCameraTransform",
+        "description": "Arguments\nnone\nReturn value\ntransform (table) – Current camera transform\n\n\nExample\nlocal t = GetCameraTransform()"
+    },
+    {
+        "scope": "lua",
+        "body": "SetCameraTransform()",
+        "prefix": "SetCameraTransform",
+        "description": "Arguments\ntransform (table) – Desired camera transform\nfov (number, optional) – Optional horizontal field of view in degrees (default: 90)\n\nReturn value\nnone\n\nExample\nSetCameraTransform(Transform(Vec(0, 10, 0), QuatEuler(0, 90, 0)))"
+    },
+    {
+        "scope": "lua",
+        "body": "PointLight()",
+        "prefix": "PointLight",
+        "description": "Arguments\npos (table) – World space light position\nr (number) – Red\ng (number) – Green\nb (number) – Blue\nintensity (number, optional) – Intensity. Default is 1.0.\n\nReturn value\nnone\n\nExample\n--Pulsating, yellow light above world origo\nlocal intensity = 3 + math.sin(GetTime())\nPointLight(Vec(0, 5, 0), 1, 1, 0, intensity)"
+    },
+    {
+        "scope": "lua",
+        "body": "SetTimeScale()",
+        "prefix": "SetTimeScale",
+        "description": "Arguments\nscale (number) – Time scale 0.1 to 1.0\n\nReturn value\nnone\n\nExample\n--Slow down time when holding down a key\nif InputDown('t') then\n\tSetTimeScale(0.2)\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "DrawLine()",
+        "prefix": "DrawLine",
+        "description": "Arguments\np0 (table) – World space point as vector\np1 (table) – World space point as vector\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number, optional) – Alpha\n\nReturn value\nnone\n\nExample\n--Draw white debug line\nDrawLine(Vec(0, 0, 0), Vec(-10, 5, -10))\n\n--Draw red debug line\nDrawLine(Vec(0, 0, 0), Vec(10, 5, 10), 1, 0, 0)"
+    },
+    {
+        "scope": "lua",
+        "body": "DebugLine()",
+        "prefix": "DebugLine",
+        "description": "Arguments\np0 (table) – World space point as vector\np1 (table) – World space point as vector\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number, optional) – Alpha\n\nReturn value\nnone\n\nExample\n--Draw white debug line\nDebugLine(Vec(0, 0, 0), Vec(-10, 5, -10))\n\n--Draw red debug line\nDebugLine(Vec(0, 0, 0), Vec(10, 5, 10), 1, 0, 0)"
+    },
+    {
+        "scope": "lua",
+        "body": "DebugCross()",
+        "prefix": "DebugCross",
+        "description": "Arguments\np0 (table) – World space point as vector\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number, optional) – Alpha\n\nReturn value\nnone\n\nExample\nDebugCross(Vec(10, 5, 5))"
+    },
+    {
+        "scope": "lua",
+        "body": "DebugWatch()",
+        "prefix": "DebugWatch",
+        "description": "Arguments\nname (string) – Name\nvalue (string) – Value\n\nReturn value\nnone\n\nExample\nlocal t = 5\nDebugWatch(\"time\", t)"
+    },
+    {
+        "scope": "lua",
+        "body": "DebugPrint()",
+        "prefix": "DebugPrint",
+        "description": "Arguments\nmessage (string) – Message to display\n\nReturn value\nnone\n\nExample\nDebugPrint(\"time\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiMakeInteractive()",
+        "prefix": "UiMakeInteractive",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nUiMakeInteractive()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiPush()",
+        "prefix": "UiPush",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nUiColor(1,0,0)\nUiText(\"Red\")\nUiPush()\n\tUiColor(0,1,0)\n\tUiText(\"Green\")\nUiPop()\nUiText(\"Red\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiPop()",
+        "prefix": "UiPop",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nUiColor(1,0,0)\nUiText(\"Red\")\nUiPush()\n\tUiColor(0,1,0)\n\tUiText(\"Green\")\nUiPop()\nUiText(\"Red\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiWidth()",
+        "prefix": "UiWidth",
+        "description": "Arguments\nnone\nReturn value\nwidth (number) – Width of draw context\n\n\nExample\nlocal w = UiWidth()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiHeight()",
+        "prefix": "UiHeight",
+        "description": "Arguments\nnone\nReturn value\nheight (number) – Height of draw context\n\n\nExample\nlocal h = UiHeight()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiCenter()",
+        "prefix": "UiCenter",
+        "description": "Arguments\nnone\nReturn value\ncenter (number) – Half width of draw context\n\n\nExample\nlocal c = UiCenter()\n--Same as \nlocal c = UiWidth()/2"
+    },
+    {
+        "scope": "lua",
+        "body": "UiMiddle()",
+        "prefix": "UiMiddle",
+        "description": "Arguments\nnone\nReturn value\nmiddle (number) – Half height of draw context\n\n\nExample\nlocal m = UiMiddle()\n--Same as\nlocal m = UiHeight()/2"
+    },
+    {
+        "scope": "lua",
+        "body": "UiColor()",
+        "prefix": "UiColor",
+        "description": "Arguments\nr (number) – Red channel\ng (number) – Green channel\nb (number) – Blue channel\na (number, optional) – Alpha channel. Default 1.0\n\nReturn value\nnone\n\nExample\n--Set color yellow\nUiColor(1,1,0)"
+    },
+    {
+        "scope": "lua",
+        "body": "UiColorFilter()",
+        "prefix": "UiColorFilter",
+        "description": "Arguments\nr (number) – Red channel\ng (number) – Green channel\nb (number) – Blue channel\na (number, optional) – Alpha channel. Default 1.0\n\nReturn value\nnone\n\nExample\nUiPush()\n\t--Draw menu in transparent, yellow color tint\n\tUiColorFilter(1, 1, 0, 0.5)\n\tdrawMenu()\nUiPop()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiTranslate()",
+        "prefix": "UiTranslate",
+        "description": "Arguments\nx (number) – X component\ny (number) – Y component\n\nReturn value\nnone\n\nExample\nUiPush()\n\tUiTranslate(100, 0)\n\tUiText(\"Indented\")\nUiPop()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiRotate()",
+        "prefix": "UiRotate",
+        "description": "Arguments\nangle (number) – Angle in degrees, counter clockwise\n\nReturn value\nnone\n\nExample\nUiPush()\n\tUiRotate(45)\n\tUiText(\"Rotated\")\nUiPop()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiScale()",
+        "prefix": "UiScale",
+        "description": "Arguments\nx (number) – X component\ny (number, optional) – Y component. Default value is x.\n\nReturn value\nnone\n\nExample\nUiPush()\n\tUiScale(2)\n\tUiText(\"Double size\")\nUiPop()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiWindow()",
+        "prefix": "UiWindow",
+        "description": "Arguments\nwidth (number) – Window width\nheight (number) – Window height\nclip (boolean, optional) – Clip content outside window. Default is false.\n\nReturn value\nnone\n\nExample\nUiPush()\n\tUiWindow(400, 200)\n\tlocal w = UiWidth()\n\t--w is now 400\nUiPop()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiSafeMargins()",
+        "prefix": "UiSafeMargins",
+        "description": "Arguments\nnone\nReturn value\nx0 (number) – Left\ny0 (number) – Top\nx1 (number) – Right\ny1 (number) – Bottom\n\n\nExample\nfunction draw()\n\tlocal x0, y0, x1, y1 = UiSafeMargins()\n\tUiTranslate(x0, y0)\n\tUiWindow(x1-x0, y1-y0, true)\n\t--The drawing area is now 1920 by 1080 in the center of screen\n\tdrawMenu()\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiAlign()",
+        "prefix": "UiAlign",
+        "description": "Arguments\nalignment (string) – Alignment keywords\n\nReturn value\nnone\n\nExample\nUiAlign(\"left\")\nUiText(\"Aligned left at baseline\")\n\nUiAlign(\"center middle\")\nUiText(\"Fully centered\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiModalBegin()",
+        "prefix": "UiModalBegin",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nUiModalBegin()\nif UiTextButton(\"Okay\") then\n\t--All other interactive ui elements except this one are disabled\nend\nUiModalEnd()\n\n--This is also okay\nUiPush()\n\tUiModalBegin()\n\tif UiTextButton(\"Okay\") then\n\t\t--All other interactive ui elements except this one are disabled\n\tend\nUiPop()\n--No longer modal"
+    },
+    {
+        "scope": "lua",
+        "body": "UiModalEnd()",
+        "prefix": "UiModalEnd",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nUiModalBegin()\nif UiTextButton(\"Okay\") then\n\t--All other interactive ui elements except this one are disabled\nend\nUiModalEnd()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiDisableInput()",
+        "prefix": "UiDisableInput",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nUiPush()\n\tUiDisableInput()\n\tif UiButtonText(\"Okay\") then\n\t\t--Will never happen\n\tend\nUiPop()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiEnableInput()",
+        "prefix": "UiEnableInput",
+        "description": "Arguments\nnone\nReturn value\nnone\n\nExample\nUiDisableInput()\nif UiButtonText(\"Okay\") then\n\t--Will never happen\nend\n\nUiEnableInput()\nif UiButtonText(\"Okay\") then\n\t--This can happen\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiReceivesInput()",
+        "prefix": "UiReceivesInput",
+        "description": "Arguments\nnone\nReturn value\nreceives (boolean) – True if current context receives input\n\n\nExample\nif UiReceivesInput() then\n\thighlightItemAtMousePointer()\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiGetMousePos()",
+        "prefix": "UiGetMousePos",
+        "description": "Arguments\nnone\nReturn value\nx (number) – X coordinate\ny (number) – Y coordinate\n\n\nExample\nlocal x, y = UiGetMousePos()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiIsMouseInRect()",
+        "prefix": "UiIsMouseInRect",
+        "description": "Arguments\nw (number) – Width\nh (number) – Height\n\nReturn value\ninside (boolean) – True if mouse pointer is within rectangle\n\n\nExample\nif UiIsMouseInRect(100, 100) then\n\t-- mouse pointer is in rectangle\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiWorldToPixel()",
+        "prefix": "UiWorldToPixel",
+        "description": "Arguments\npoint (table) – 3D world position as vector\n\nReturn value\nx (number) – X coordinate\ny (number) – Y coordinate\ndistance (number) – Distance to point\n\n\nExample\nlocal x, y, dist = UiWorldToPixel(point)\nif dist > 0 then\nUiTranslate(x, y)\nUiText(\"Label\")\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiPixelToWorld()",
+        "prefix": "UiPixelToWorld",
+        "description": "Arguments\nx (number) – X coordinate\ny (number) – Y coordinate\n\nReturn value\ndirection (table) – 3D world direction as vector\n\n\nExample\nUiMakeInteractive()\nlocal x, y = UiGetMousePos()\nlocal dir = UiPixelToWorld(x, y)\nlocal pos = GetCameraTransform().pos\nlocal hit, dist = QueryRaycast(pos, dir, 100)\nif hit then\n\tDebugPrint(\"hit distance: \" .. dist)\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiBlur()",
+        "prefix": "UiBlur",
+        "description": "Arguments\namount (number) – Blur amount (0.0 to 1.0)\n\nReturn value\nnone\n\nExample\nUiBlur(1.0)\ndrawMenu()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiFont()",
+        "prefix": "UiFont",
+        "description": "Arguments\npath (string) – Path to TTF font file\nsize (number) – Font size (10 to 100)\n\nReturn value\nnone\n\nExample\nUiFont(\"bold.ttf\", 24)\nUiText(\"Hello\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiFontHeight()",
+        "prefix": "UiFontHeight",
+        "description": "Arguments\nnone\nReturn value\nsize (number) – Font size\n\n\nExample\nlocal h = UiFontHeight()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiText()",
+        "prefix": "UiText",
+        "description": "Arguments\ntext (string) – Print text at cursor location\nmove (boolean, optional) – Automatically move cursor vertically. Default false.\n\nReturn value\nw (number) – Width of text\nh (number) – Height of text\n\n\nExample\nUiFont(\"bold.ttf\", 24)\nUiText(\"Hello\")\n\n...\n\n--Automatically advance cursor\nUiText(\"First line\", true)\nUiText(\"Second line\", true)"
+    },
+    {
+        "scope": "lua",
+        "body": "UiGetTextSize()",
+        "prefix": "UiGetTextSize",
+        "description": "Arguments\ntext (string) – A text string\n\nReturn value\nw (number) – Width of text\nh (number) – Height of text\n\n\nExample\nlocal w, h = GetTextSize(\"Some text\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiWordWrap()",
+        "prefix": "UiWordWrap",
+        "description": "Arguments\nwidth (number) – Maximum width of text\n\nReturn value\nnone\n\nExample\nUiWordWrap(200)\nUiText(\"Some really long text that will get wrapped into several lines\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiTextOutline()",
+        "prefix": "UiTextOutline",
+        "description": "Arguments\nr (number) – Red channel\ng (number) – Green channel\nb (number) – Blue channel\na (number) – Alpha channel\nthickness (number, optional) – Outline thickness. Default is 0.1\n\nReturn value\nnone\n\nExample\n--Black outline, standard thickness\nUiTextOutline(0,0,0,1)\nUiText(\"Text with outline\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiTextShadow()",
+        "prefix": "UiTextShadow",
+        "description": "Arguments\nr (number) – Red channel\ng (number) – Green channel\nb (number) – Blue channel\na (number) – Alpha channel\ndistance (number, optional) – Shadow distance. Default is 1.0\nblur (number, optional) – Shadow blur. Default is 0.5\n\nReturn value\nnone\n\nExample\n--Black drop shadow, 50% transparent, distance 2\nUiTextShadow(0, 0, 0, 0.5, 2.0)\nUiText(\"Text with drop shadow\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiRect()",
+        "prefix": "UiRect",
+        "description": "Arguments\nw (number) – Width\nh (number) – Height\n\nReturn value\nnone\n\nExample\n--Draw full-screen black rectangle\nUiColor(0, 0, 0)\nUiRect(UiWidth(), UiHeight())\n\n--Draw smaller, red, rotating rectangle in center of screen\nUiPush()\n\tUiColor(1, 0, 0)\n\tUiTranslate(UiCenter(), UiMiddle())\n\tUiRotate(GetTime())\n\tUiAlign(\"center middle\")\n\tUiRect(100, 100)\nUiPop()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiImage()",
+        "prefix": "UiImage",
+        "description": "Arguments\npath (string) – Path to image (PNG or JPG format)\n\nReturn value\nw (number) – Image width\nh (number) – Image height\n\n\nExample\n--Draw image in center of screen\nUiPush()\n\tUiTranslate(UiCenter(), UiMiddle())\n\tUiAlign(\"center middle\")\n\tUiImage(\"test.png\")\nUiPop()"
+    },
+    {
+        "scope": "lua",
+        "body": "UiGetImageSize()",
+        "prefix": "UiGetImageSize",
+        "description": "Arguments\npath (string) – Path to image (PNG or JPG format)\n\nReturn value\nw (number) – Image width\nh (number) – Image height\n\n\nExample\nlocal w,h = UiGetImageSize(\"test.png\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiImageBox()",
+        "prefix": "UiImageBox",
+        "description": "Arguments\npath (string) – Path to image (PNG or JPG format)\nwidth (number) – Width\nheight (number) – Height\nborderWidth (number) – Border width\nborderHeight (number) – Border height\n\nReturn value\nnone\n\nExample\nUiImageBox(\"menu-frame.png\", 200, 200, 10, 10)"
+    },
+    {
+        "scope": "lua",
+        "body": "UiSound()",
+        "prefix": "UiSound",
+        "description": "Arguments\npath (string) – Path to sound file (OGG format)\nvolume (number, optional) – Playback volume. Default 1.0\npitch (number, optional) – Playback pitch. Default 1.0\npan (number, optional) – Playback stereo panning (-1.0 to 1.0). Default 0.0.\n\nReturn value\nnone\n\nExample\nUiSound(\"click.ogg\")"
+    },
+    {
+        "scope": "lua",
+        "body": "UiSoundLoop()",
+        "prefix": "UiSoundLoop",
+        "description": "Arguments\npath (string) – Path to looping sound file (OGG format)\nvolume (number, optional) – Playback volume. Default 1.0\n\nReturn value\nnone\n\nExample\nif animating then\n\tUiSoundLoop(\"screech.ogg\")\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiMute()",
+        "prefix": "UiMute",
+        "description": "Arguments\namount (number) – Mute by this amount (0.0 to 1.0)\nmusic (boolean, optional) – Mute music as well\n\nReturn value\nnone\n\nExample\nif menuOpen then\n\tUiMute(1.0)\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiButtonImageBox()",
+        "prefix": "UiButtonImageBox",
+        "description": "Arguments\npath (string) – Path to image (PNG or JPG format)\nborderWidth (number) – Border width\nborderHeight (number) – Border height\nr (number, optional) – Red multiply. Default 1.0\ng (number, optional) – Green multiply. Default 1.0\nb (number, optional) – Blue multiply. Default 1.0\na (number, optional) – Alpha channel. Default 1.0\n\nReturn value\nnone\n\nExample\nUiButtonImageBox(\"button-9slice.png\", 10, 10)\nif UiTextButton(\"Test\") then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiButtonHoverColor()",
+        "prefix": "UiButtonHoverColor",
+        "description": "Arguments\nr (number) – Red multiply\ng (number) – Green multiply\nb (number) – Blue multiply\na (number, optional) – Alpha channel. Default 1.0\n\nReturn value\nnone\n\nExample\nUiButtonHoverColor(1, 0, 0)\nif UiTextButton(\"Test\") then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiButtonPressColor()",
+        "prefix": "UiButtonPressColor",
+        "description": "Arguments\nr (number) – Red multiply\ng (number) – Green multiply\nb (number) – Blue multiply\na (number, optional) – Alpha channel. Default 1.0\n\nReturn value\nnone\n\nExample\nUiButtonPressColor(0, 1, 0)\nif UiTextButton(\"Test\") then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiButtonPressDist()",
+        "prefix": "UiButtonPressDist",
+        "description": "Arguments\ndist (number) – Press distance\n\nReturn value\nnone\n\nExample\nUiButtonPressDistance(4)\nif UiTextButton(\"Test\") then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiTextButton()",
+        "prefix": "UiTextButton",
+        "description": "Arguments\ntext (string) – Text on button\nw (number, optional) – Button width\nh (number, optional) – Button height\n\nReturn value\npressed (boolean) – True if user clicked button\n\n\nExample\nif UiTextButton(\"Test\") then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiImageButton()",
+        "prefix": "UiImageButton",
+        "description": "Arguments\npath (number) – Image path (PNG or JPG file)\nw (number, optional) – Button width\nh (number, optional) – Button height\n\nReturn value\npressed (boolean) – True if user clicked button\n\n\nExample\nif UiImageButton(\"image.png\") then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiBlankButton()",
+        "prefix": "UiBlankButton",
+        "description": "Arguments\nw (number) – Button width\nh (number) – Button height\n\nReturn value\npressed (boolean) – True if user clicked button\n\n\nExample\nif UiBlankButton(30, 30) then\n\t...\nend"
+    },
+    {
+        "scope": "lua",
+        "body": "UiSlider()",
+        "prefix": "UiSlider",
+        "description": "Arguments\npath (number) – Image path (PNG or JPG file)\naxis (string) – Drag axis, must be \"x\" or \"y\"\ncurrent (number) – Current value\nmin (number) – Minimum value\nmax (number) – Maximum value\n\nReturn value\nvalue (number) – New value, same as current if not changed\ndone (boolean) – True if user is finished changing (released slider)\n\n\nExample\nvalue = UiSlider(\"dot.png\", \"x\", value, 0, 100)"
+    },
+    {
+        "scope": "lua",
+        "body": "UiGetScreen()",
+        "prefix": "UiGetScreen",
+        "description": "Arguments\nnone\nReturn value\nhandle (number) – Handle to the screen running this script or zero if none.\n\n\nExample\n--Turn off screen running current script\nscreen = UiGetScreen()\nSetScreenEnabled(screen, false)"
+    }
+]
