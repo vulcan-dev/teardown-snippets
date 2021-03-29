@@ -1,5 +1,3 @@
-src/*.py
-src/*.js
 src/.dccache
 
 .vs*
