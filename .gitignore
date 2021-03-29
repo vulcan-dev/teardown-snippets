@@ -1,4 +1,7 @@
-src/*
+src/*.py
+src/*.js
+src/.dccache
+
 .vs*
 package.json
 *.vsix
