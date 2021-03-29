@@ -28,5 +28,11 @@ UiPush()
 UiPop()
 ```
 
+### Release 1.0.4
+
+- Added icon
+- Added [git repository](https://github.com/vulcan-dev/teardown-snippets)
+- Cleaned up file structure
+
 ### Unreleased (TODO)
 - Add description if function contains one
