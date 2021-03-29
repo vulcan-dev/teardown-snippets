@@ -1,6 +1,9 @@
 # Teardown-API Snippets
 Teardown API Snippets (https://teardowngame.com/modding/api.html)
 
+## Example
+![Example](https://i.imgur.com/ZQA3ui3.png "Example")
+
 ### 1.0.0
 
 Initial release
