@@ -4,5 +4,8 @@
 
 Repository for my [Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet)
 
+## Example
+![Example](https://i.imgur.com/ZQA3ui3.png "Example")
+
 Thanks to [Thomasims](https://github.com/Thomasims) for providing me with the basics of the web scraper  
 Thanks to [Cammy](https://github.com/camprevail) for helping me make an automated JSON fixer so that I'm able to parse the JSON
