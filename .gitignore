@@ -2,4 +2,3 @@ src/*
 .vs*
 package.json
 *.vsix
-*.md
