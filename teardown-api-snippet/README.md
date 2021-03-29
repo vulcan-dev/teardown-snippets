@@ -29,5 +29,11 @@ UiPush()
 UiPop()
 ```
 
+### Release 1.0.4
+
+- Added icon
+- Added [git repository](https://github.com/vulcan-dev/teardown-snippets)
+- Cleaned up file structure
+
 Thanks to [Thomasims](https://github.com/Thomasims) for helping with the scraping part with JS  
 Thanks to [Cammy](https://github.com/camprevail) for helping me make an automated JSON fixer so I can parse the JSON
