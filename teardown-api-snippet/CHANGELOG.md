@@ -1,6 +1,6 @@
 # Change Log
 
-### Release 1.0.0
+### 1.0.0
 
 Initial release
 
@@ -34,5 +34,8 @@ UiPop()
 - Added [git repository](https://github.com/vulcan-dev/teardown-snippets)
 - Cleaned up file structure
 
-### Unreleased (TODO)
-- Add description if function contains one
+### Release 1.0.5
+- Added function descriptions
+- Auto complete now adds the necessary function arguments
+>![Params](https://i.imgur.com/xWpmDkd.png "Function Description")
+>![Params](https://i.imgur.com/3WnDZR3.png "Function Parameters")
