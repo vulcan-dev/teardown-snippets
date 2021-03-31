@@ -49,7 +49,7 @@ UiPop()
 
 ### Release 1.0.5
 - Added function descriptions
-- Auto complete now adds the necessary function arguments
+- Auto complete now adds the necessary function parameters
 >![Params](https://i.imgur.com/xWpmDkd.png "Function Description")
 >![Params](https://i.imgur.com/3WnDZR3.png "Function Parameters")
 
