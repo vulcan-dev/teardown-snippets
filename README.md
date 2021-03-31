@@ -1,6 +1,9 @@
 # Teardown API Snippet
 
-[![deepcode](https://www.deepcode.ai/api/gh/badge?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF0Zm9ybTEiOiJnaCIsIm93bmVyMSI6InZ1bGNhbi1kZXYiLCJyZXBvMSI6InRlYXJkb3duLXNuaXBwZXRzIiwiaW5jbHVkZUxpbnQiOmZhbHNlLCJhdXRob3JJZCI6Mjg2MjcsImlhdCI6MTYxNzA1MDY4Mn0.78oCcAi7rAhMn_kNPfIBW7cj7zp05yiR3pqpPcrPLWQ)](https://www.deepcode.ai/app/gh/vulcan-dev/teardown-snippets/_/dashboard?utm_content=gh%2Fvulcan-dev%2Fteardown-snippets)
+[![deepcode](https://www.deepcode.ai/api/gh/badge?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF0Zm9ybTEiOiJnaCIsIm93bmVyMSI6InZ1bGNhbi1kZXYiLCJyZXBvMSI6InRlYXJkb3duLXNuaXBwZXRzIiwiaW5jbHVkZUxpbnQiOmZhbHNlLCJhdXRob3JJZCI6Mjg2MjcsImlhdCI6MTYxNzA1MDY4Mn0.78oCcAi7rAhMn_kNPfIBW7cj7zp05yiR3pqpPcrPLWQ)](https://www.deepcode.ai/app/gh/vulcan-dev/teardown-snippets/_/dashboard?utm_content=gh%2Fvulcan-dev%2Fteardown-snippets) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) 
+
+[![Badge for version for Visual Studio Code extension naereen.makefiles-support-for-vscode](https://vsmarketplacebadge.apphb.com/version/vulcan-dev.teardown-api-snippet.svg)](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet) [![Badge for version for Visual Studio Code extension naereen.makefiles-support-for-vscode](https://vsmarketplacebadge.apphb.com/installs/vulcan-dev.teardown-api-snippet.svg)](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet) [![Badge for rating for Visual Studio Code extension naereen.makefiles-support-for-vscode](https://vsmarketplacebadge.apphb.com/rating/vulcan-dev.teardown-api-snippet.svg)](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet)
+
 
 Repository for my [Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet)
 
