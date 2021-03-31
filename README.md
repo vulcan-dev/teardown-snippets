@@ -57,6 +57,9 @@ UiPop()
 ### Release 1.0.6
 - Updated function arguments so it can handle all datatypes. Tabbing also now selects each argument when you create the function
 
+>![1.0.6](https://i.imgur.com/cH1XQrO.png)
+>![1.0.6](https://i.imgur.com/eLrd6vI.png)
+
 ### Other
 > I did try doing this for Sublime Text 3 but it doesn't allow multiline descriptions so I don't see the point because you'll have to go to the teardown website (I made this so you don't have to do that)
 

@@ -43,3 +43,6 @@ UiPop()
 
 ### Release 1.0.6
 - Updated function arguments so it can handle all datatypes. Tabbing also now selects each argument when you create the function
+
+>![1.0.6](https://i.imgur.com/cH1XQrO.png)
+>![1.0.6](https://i.imgur.com/eLrd6vI.png)
