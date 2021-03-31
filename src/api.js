@@ -20,8 +20,9 @@ DOC = [...document.getElementsByClassName("function")].map((el) => {
     while (!el.classList.contains('example')) {info = `${info}\n${el.textContent.trim()}`; el = el.nextElementSibling};
     const example = el.innerText.trim();
 
+    
     let args = arguments.match(paramregex);
-    if (args === null) args = "$0";
+    if (args === null) args = "";
 
     innerObj = {
             scope: "lua",
