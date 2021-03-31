@@ -25,7 +25,7 @@
     },
     {
         "scope": "lua",
-        "body": "GetVersion($0)",
+        "body": "GetVersion()",
         "prefix": "GetVersion",
         "description": "Arguments\nnone\n\nReturn value\nversion (string) – Dot separated string of current version of the game\n\n\nFunction Information\nnone\n\nExample\nlocal v = GetVersion()\n--v is \"0.5.0\""
     },
@@ -37,13 +37,13 @@
     },
     {
         "scope": "lua",
-        "body": "GetTime($0)",
+        "body": "GetTime()",
         "prefix": "GetTime",
         "description": "Arguments\nnone\n\nReturn value\ntime (number) – The time in seconds since level was started\n\n\nFunction Information\nReturns running time of this script. If called from update, this returns the simulated time, otherwise it returns wall time.\n\nExample\nlocal t = GetTime()"
     },
     {
         "scope": "lua",
-        "body": "GetTimeStep($0)",
+        "body": "GetTimeStep()",
         "prefix": "GetTimeStep",
         "description": "Arguments\nnone\n\nReturn value\ndt (number) – The timestep in seconds\n\n\nFunction Information\nReturns timestep of the last frame. If called from update, this returns the simulation time step, which is always one 60th of a second (0.0166667). If called from tick or draw it returns the actual time since last frame.\n\nExample\nlocal dt = GetTimeStep()"
     },
@@ -91,13 +91,13 @@
     },
     {
         "scope": "lua",
-        "body": "Restart($0)",
+        "body": "Restart()",
         "prefix": "Restart",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nRestart level\n\nExample\nif shouldRestart then\nRestart()\nend"
     },
     {
         "scope": "lua",
-        "body": "Menu($0)",
+        "body": "Menu()",
         "prefix": "Menu",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nGo to main menu\n\nExample\nif shouldExitLevel then\nMenu()\nend"
     },
@@ -853,13 +853,13 @@
     },
     {
         "scope": "lua",
-        "body": "GetPlayerPos($0)",
+        "body": "GetPlayerPos()",
         "prefix": "GetPlayerPos",
         "description": "Arguments\nnone\n\nReturn value\nposition (table) – Player center position\n\n\nFunction Information\nReturn center point of player. This function is deprecated. Use GetPlayerTransform instead.\n\nExample\nlocal p = GetPlayerPos()\n\n--This is equivalent to\np = VecAdd(GetPlayerTransform().pos, Vec(0,1,0))"
     },
     {
         "scope": "lua",
-        "body": "GetPlayerTransform($0)",
+        "body": "GetPlayerTransform()",
         "prefix": "GetPlayerTransform",
         "description": "Arguments\nnone\n\nReturn value\ntransform (table) – Current player transform\n\n\nFunction Information\nThe player transform is located at the bottom of the player. The player transform considers heading (looking left and right). Forward is along negative Z axis. Player pitch (looking up and down) does not affect player transform. If you want the transform of the eye, use GetPlayerCameraTransform() instead.\n\nExample\nlocal t = GetPlayerTransform()"
     },
@@ -871,7 +871,7 @@
     },
     {
         "scope": "lua",
-        "body": "GetPlayerCameraTransform($0)",
+        "body": "GetPlayerCameraTransform()",
         "prefix": "GetPlayerCameraTransform",
         "description": "Arguments\nnone\n\nReturn value\ntransform (table) – Current player camera transform\n\n\nFunction Information\nThe player camera transform is usually the same as what you get from GetCameraTransform, but if you have set a camera transform manually with SetCameraTransform, you can retrieve the standard player camera transform with this function.\n\nExample\nlocal t = GetPlayerCameraTransform()"
     },
@@ -883,7 +883,7 @@
     },
     {
         "scope": "lua",
-        "body": "GetPlayerVelocity($0)",
+        "body": "GetPlayerVelocity()",
         "prefix": "GetPlayerVelocity",
         "description": "Arguments\nnone\n\nReturn value\nvelocity (table) – Player velocity in world space as vector\n\n\nFunction Information\nnone\n\nExample\nlocal vel = GetPlayerVelocity()"
     },
@@ -901,43 +901,43 @@
     },
     {
         "scope": "lua",
-        "body": "GetPlayerVehicle($0)",
+        "body": "GetPlayerVehicle()",
         "prefix": "GetPlayerVehicle",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Current vehicle handle, or zero if not in vehicle\n\n\nFunction Information\nnone\n\nExample\nlocal vehicle = GetPlayerVehicle()\nif vehicle ~= 0 then\n\t...\nend"
     },
     {
         "scope": "lua",
-        "body": "GetPlayerGrabShape($0)",
+        "body": "GetPlayerGrabShape()",
         "prefix": "GetPlayerGrabShape",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to grabbed shape or zero if not grabbing.\n\n\nFunction Information\nnone\n\nExample\nlocal shape = GetPlayerGrabShape()\nif shape ~= 0 then\n\t...\nend"
     },
     {
         "scope": "lua",
-        "body": "GetPlayerGrabBody($0)",
+        "body": "GetPlayerGrabBody()",
         "prefix": "GetPlayerGrabBody",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to grabbed body or zero if not grabbing.\n\n\nFunction Information\nnone\n\nExample\nlocal body = GetPlayerGrabBody()\nif body ~= 0 then\n\t...\nend"
     },
     {
         "scope": "lua",
-        "body": "GetPlayerPickShape($0)",
+        "body": "GetPlayerPickShape()",
         "prefix": "GetPlayerPickShape",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to picked shape or zero if nothing is picked\n\n\nFunction Information\nnone\n\nExample\nlocal shape = GetPlayerPickShape()\nif shape ~= 0 then\n\t...\nend"
     },
     {
         "scope": "lua",
-        "body": "GetPlayerPickBody($0)",
+        "body": "GetPlayerPickBody()",
         "prefix": "GetPlayerPickBody",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to picked body or zero if nothing is picked\n\n\nFunction Information\nnone\n\nExample\nlocal body = GetPlayerPickBody()\nif body ~= 0 then\n\t...\nend"
     },
     {
         "scope": "lua",
-        "body": "GetPlayerInteractShape($0)",
+        "body": "GetPlayerInteractShape()",
         "prefix": "GetPlayerInteractShape",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to interactable shape or zero\n\n\nFunction Information\nInteractable shapes has to be tagged with \"interact\". The engine determines which interactable shape is currently interactable.\n\nExample\nlocal shape = GetPlayerInteractShape()\nif shape ~= 0 then\n\t...\nend"
     },
     {
         "scope": "lua",
-        "body": "GetPlayerInteractBody($0)",
+        "body": "GetPlayerInteractBody()",
         "prefix": "GetPlayerInteractBody",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to interactable body or zero\n\n\nFunction Information\nInteractable shapes has to be tagged with \"interact\". The engine determines which interactable body is currently interactable.\n\nExample\nlocal body = GetPlayerInteractBody()\nif body ~= 0 then\n\t...\nend"
     },
@@ -949,7 +949,7 @@
     },
     {
         "scope": "lua",
-        "body": "GetPlayerScreen($0)",
+        "body": "GetPlayerScreen()",
         "prefix": "GetPlayerScreen",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to interacted screen or zero if none\n\n\nFunction Information\nnone\n\nExample\n--Interact with screen\nlocal screen = GetPlayerScreen()"
     },
@@ -961,13 +961,13 @@
     },
     {
         "scope": "lua",
-        "body": "GetPlayerHealth($0)",
+        "body": "GetPlayerHealth()",
         "prefix": "GetPlayerHealth",
         "description": "Arguments\nnone\n\nReturn value\nhealth (number) – Current player health\n\n\nFunction Information\nnone\n\nExample\nlocal health = GetPlayerHealth()"
     },
     {
         "scope": "lua",
-        "body": "RespawnPlayer($0)",
+        "body": "RespawnPlayer()",
         "prefix": "RespawnPlayer",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nRespawn player at spawn position without modifying the scene\n\nExample\nRespawnPlayer()"
     },
@@ -979,7 +979,7 @@
     },
     {
         "scope": "lua",
-        "body": "GetToolBody($0)",
+        "body": "GetToolBody()",
         "prefix": "GetToolBody",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to currently visible tool body or zero if none\n\n\nFunction Information\nReturn body handle of the visible tool. You can use this to retrieve tool shapes and animate them, change emissiveness, etc. Do not attempt to set the tool body transform, since it is controlled by the engine. Use SetToolTranform for that.\n\nExample\nlocal toolBody = GetToolBody()\nif toolBody~=0 then\n\t...\nend"
     },
@@ -1021,7 +1021,7 @@
     },
     {
         "scope": "lua",
-        "body": "StopMusic($0)",
+        "body": "StopMusic()",
         "prefix": "StopMusic",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nStopMusic()"
     },
@@ -1087,7 +1087,7 @@
     },
     {
         "scope": "lua",
-        "body": "GetLastSound($0)",
+        "body": "GetLastSound()",
         "prefix": "GetLastSound",
         "description": "Arguments\nnone\n\nReturn value\nvolume (number) – Volume of loudest sound played last frame\nposition (table) – World position of loudest sound played last frame\n\n\nFunction Information\nnone\n\nExample\nlocal vol, pos = GetLastSound()"
     },
@@ -1129,13 +1129,13 @@
     },
     {
         "scope": "lua",
-        "body": "GetFireCount($0)",
+        "body": "GetFireCount()",
         "prefix": "GetFireCount",
         "description": "Arguments\nnone\n\nReturn value\ncount (number) – Number of active fires in level\n\n\nFunction Information\nnone\n\nExample\nlocal c = GetFireCount()"
     },
     {
         "scope": "lua",
-        "body": "GetCameraTransform($0)",
+        "body": "GetCameraTransform()",
         "prefix": "GetCameraTransform",
         "description": "Arguments\nnone\n\nReturn value\ntransform (table) – Current camera transform\n\n\nFunction Information\nnone\n\nExample\nlocal t = GetCameraTransform()"
     },
@@ -1189,43 +1189,43 @@
     },
     {
         "scope": "lua",
-        "body": "UiMakeInteractive($0)",
+        "body": "UiMakeInteractive()",
         "prefix": "UiMakeInteractive",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nCalling this function will disable game input, bring up the mouse pointer and allow Ui interaction with the calling script without pausing the game. This can be useful to make interactive user interfaces from scripts while the game is running. Call this continuously every frame as long as Ui interaction is desired.\n\nExample\nUiMakeInteractive()"
     },
     {
         "scope": "lua",
-        "body": "UiPush($0)",
+        "body": "UiPush()",
         "prefix": "UiPush",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nPush state onto stack. This is used in combination with UiPop to remember a state and restore to that state later.\n\nExample\nUiColor(1,0,0)\nUiText(\"Red\")\nUiPush()\n\tUiColor(0,1,0)\n\tUiText(\"Green\")\nUiPop()\nUiText(\"Red\")"
     },
     {
         "scope": "lua",
-        "body": "UiPop($0)",
+        "body": "UiPop()",
         "prefix": "UiPop",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nPop state from stack and make it the current one. This is used in combination with UiPush to remember a previous state and go back to it later.\n\nExample\nUiColor(1,0,0)\nUiText(\"Red\")\nUiPush()\n\tUiColor(0,1,0)\n\tUiText(\"Green\")\nUiPop()\nUiText(\"Red\")"
     },
     {
         "scope": "lua",
-        "body": "UiWidth($0)",
+        "body": "UiWidth()",
         "prefix": "UiWidth",
         "description": "Arguments\nnone\n\nReturn value\nwidth (number) – Width of draw context\n\n\nFunction Information\nnone\n\nExample\nlocal w = UiWidth()"
     },
     {
         "scope": "lua",
-        "body": "UiHeight($0)",
+        "body": "UiHeight()",
         "prefix": "UiHeight",
         "description": "Arguments\nnone\n\nReturn value\nheight (number) – Height of draw context\n\n\nFunction Information\nnone\n\nExample\nlocal h = UiHeight()"
     },
     {
         "scope": "lua",
-        "body": "UiCenter($0)",
+        "body": "UiCenter()",
         "prefix": "UiCenter",
         "description": "Arguments\nnone\n\nReturn value\ncenter (number) – Half width of draw context\n\n\nFunction Information\nnone\n\nExample\nlocal c = UiCenter()\n--Same as \nlocal c = UiWidth()/2"
     },
     {
         "scope": "lua",
-        "body": "UiMiddle($0)",
+        "body": "UiMiddle()",
         "prefix": "UiMiddle",
         "description": "Arguments\nnone\n\nReturn value\nmiddle (number) – Half height of draw context\n\n\nFunction Information\nnone\n\nExample\nlocal m = UiMiddle()\n--Same as\nlocal m = UiHeight()/2"
     },
@@ -1267,7 +1267,7 @@
     },
     {
         "scope": "lua",
-        "body": "UiSafeMargins($0)",
+        "body": "UiSafeMargins()",
         "prefix": "UiSafeMargins",
         "description": "Arguments\nnone\n\nReturn value\nx0 (number) – Left\ny0 (number) – Top\nx1 (number) – Right\ny1 (number) – Bottom\n\n\nFunction Information\nReturn a safe drawing area that will always be visible regardless of display aspect ratio. The safe drawing area will always be 1920 by 1080 in size. This is useful for setting up a fixed size UI.\n\nExample\nfunction draw()\n\tlocal x0, y0, x1, y1 = UiSafeMargins()\n\tUiTranslate(x0, y0)\n\tUiWindow(x1-x0, y1-y0, true)\n\t--The drawing area is now 1920 by 1080 in the center of screen\n\tdrawMenu()\nend"
     },
@@ -1279,37 +1279,37 @@
     },
     {
         "scope": "lua",
-        "body": "UiModalBegin($0)",
+        "body": "UiModalBegin()",
         "prefix": "UiModalBegin",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nDisable input for everything, except what's between UiModalBegin and UiModalEnd (or if modal state is popped)\n\nExample\nUiModalBegin()\nif UiTextButton(\"Okay\") then\n\t--All other interactive ui elements except this one are disabled\nend\nUiModalEnd()\n\n--This is also okay\nUiPush()\n\tUiModalBegin()\n\tif UiTextButton(\"Okay\") then\n\t\t--All other interactive ui elements except this one are disabled\n\tend\nUiPop()\n--No longer modal"
     },
     {
         "scope": "lua",
-        "body": "UiModalEnd($0)",
+        "body": "UiModalEnd()",
         "prefix": "UiModalEnd",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nDisable input for everything, except what's between UiModalBegin and UiModalEnd Calling this function is optional. Modality is part of the current state and will be lost if modal state is popped.\n\nExample\nUiModalBegin()\nif UiTextButton(\"Okay\") then\n\t--All other interactive ui elements except this one are disabled\nend\nUiModalEnd()"
     },
     {
         "scope": "lua",
-        "body": "UiDisableInput($0)",
+        "body": "UiDisableInput()",
         "prefix": "UiDisableInput",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nDisable input\n\nExample\nUiPush()\n\tUiDisableInput()\n\tif UiButtonText(\"Okay\") then\n\t\t--Will never happen\n\tend\nUiPop()"
     },
     {
         "scope": "lua",
-        "body": "UiEnableInput($0)",
+        "body": "UiEnableInput()",
         "prefix": "UiEnableInput",
         "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nEnable input that has been previously disabled\n\nExample\nUiDisableInput()\nif UiButtonText(\"Okay\") then\n\t--Will never happen\nend\n\nUiEnableInput()\nif UiButtonText(\"Okay\") then\n\t--This can happen\nend"
     },
     {
         "scope": "lua",
-        "body": "UiReceivesInput($0)",
+        "body": "UiReceivesInput()",
         "prefix": "UiReceivesInput",
         "description": "Arguments\nnone\n\nReturn value\nreceives (boolean) – True if current context receives input\n\n\nFunction Information\nThis function will check current state receives input. This is the case if input is not explicitly disabled with (with UiDisableInput) and no other state is currently modal (with UiModalBegin). Input functions and UI elements already do this check internally, but it can sometimes be useful to read the input state manually to trigger things in the UI.\n\nExample\nif UiReceivesInput() then\n\thighlightItemAtMousePointer()\nend"
     },
     {
         "scope": "lua",
-        "body": "UiGetMousePos($0)",
+        "body": "UiGetMousePos()",
         "prefix": "UiGetMousePos",
         "description": "Arguments\nnone\n\nReturn value\nx (number) – X coordinate\ny (number) – Y coordinate\n\n\nFunction Information\nGet mouse pointer position relative to the cursor\n\nExample\nlocal x, y = UiGetMousePos()"
     },
@@ -1345,7 +1345,7 @@
     },
     {
         "scope": "lua",
-        "body": "UiFontHeight($0)",
+        "body": "UiFontHeight()",
         "prefix": "UiFontHeight",
         "description": "Arguments\nnone\n\nReturn value\nsize (number) – Font size\n\n\nFunction Information\nnone\n\nExample\nlocal h = UiFontHeight()"
     },
@@ -1471,7 +1471,7 @@
     },
     {
         "scope": "lua",
-        "body": "UiGetScreen($0)",
+        "body": "UiGetScreen()",
         "prefix": "UiGetScreen",
         "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to the screen running this script or zero if none.\n\n\nFunction Information\nnone\n\nExample\n--Turn off screen running current script\nscreen = UiGetScreen()\nSetScreenEnabled(screen, false)"
     }
