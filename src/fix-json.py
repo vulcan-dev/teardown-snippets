@@ -1,8 +1,6 @@
 import json
 import os
 
-os.chdir('./src')
-
 with open('data.json', 'r') as f:
     j = json.load(f)
 
