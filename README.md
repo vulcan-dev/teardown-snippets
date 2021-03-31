@@ -53,5 +53,8 @@ UiPop()
 >![Params](https://i.imgur.com/xWpmDkd.png "Function Description")
 >![Params](https://i.imgur.com/3WnDZR3.png "Function Parameters")
 
+### Other
+> I did try doing this for Sublime Text 3 but it doesn't allow multiline descriptions so I don't see the point because you'll have to go to the teardown website (I made this so you don't have to do that)
+
 Thanks to [Thomasims](https://github.com/Thomasims) for helping with the scraping part with JS  
 Thanks to [Cammy](https://github.com/camprevail) for helping me make an automated JSON fixer so I can parse the JSON
