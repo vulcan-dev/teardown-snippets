@@ -51,5 +51,10 @@ UiPop()
 >![1.0.6](https://i.imgur.com/cH1XQrO.png)
 >![1.0.6](https://i.imgur.com/eLrd6vI.png)
 
+### Release 1.3.6
+- Added back init, tick, update, draw functions
+- Added back all functions that don't have arguments
+
+
 Thanks to [Thomasims](https://github.com/Thomasims) for helping with the scraping part with JS  
 Thanks to [Cammy](https://github.com/camprevail) for helping me make an automated JSON fixer so I can parse the JSON

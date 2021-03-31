@@ -46,3 +46,8 @@ UiPop()
 
 >![1.0.6](https://i.imgur.com/cH1XQrO.png)
 >![1.0.6](https://i.imgur.com/eLrd6vI.png)
+
+### Release 1.3.6
+- Added back init, tick, update, draw functions
+- Added back all functions that don't have arguments
+

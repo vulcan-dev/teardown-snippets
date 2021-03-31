@@ -1,4 +1,45 @@
 {
+	"init": {
+		"scope": "lua",
+		"body": [
+			"function init()",
+			"\t$0",
+			"end"
+		],
+		"prefix": "init",
+		"description": "Called once at load time"
+	},
+	"tick": {
+		"scope": "lua",
+		"body": [
+			"function tick(dt)",
+			"\t$0",
+			"end"
+		],
+		"prefix": "tick",
+		"description": "Called exactly once per frame. The time step is variable but always between 0.0 and 0.0333333"
+	},
+	"update": {
+		"scope": "lua",
+		"body": [
+			"function update(dt)",
+			"\t$0",
+			"end"
+		],
+		"prefix": "update",
+		"description": "Called at a fixed update rate, but at the most two times per frame. Time step is always 0.0166667 (60 updates per second). Depending on frame rate it might not be called at all for a particular frame."
+	},
+	"draw": {
+		"scope": "lua",
+		"body": [
+			"function draw()",
+			"\t$0",
+			"end"
+		],
+		"prefix": "draw",
+		"description": "Called when the 2D overlay is being draw, after the scene but before the standard HUD. Ui functions can only be used from this callback."
+	},
+
     "GetIntParam": {
         "scope": "lua",
         "body": "GetIntParam('${name}',${default})",
@@ -13,7 +54,7 @@
     },
     "GetBoolParam": {
         "scope": "lua",
-        "body": "GetBoolParam('${name}',${default})",
+        "body": "GetBoolParam('${name}',default)",
         "prefix": "GetBoolParam",
         "description": "Arguments\nname (string) – Parameter name\ndefault (boolean) – Default parameter value\n\n\nReturn value\nvalue (boolean) – Parameter value\n\n\nFunction Information\nnone\n\nExample\n--Retrieve playsound parameter, or false if omitted\nparameterPlaySound = GetBoolParameter(\"playsound\", false)"
     },
@@ -23,11 +64,29 @@
         "prefix": "GetStringParam",
         "description": "Arguments\nname (string) – Parameter name\ndefault (string) – Default parameter value\n\n\nReturn value\nvalue (string) – Parameter value\n\n\nFunction Information\nnone\n\nExample\n--Retrieve mode parameter, or \"idle\" if omitted\nparameterMode = GetSrtingParameter(\"mode\", \"idle\")"
     },
+    "GetVersion": {
+        "scope": "lua",
+        "body": "GetVersion()",
+        "prefix": "GetVersion",
+        "description": "Arguments\nnone\n\nReturn value\nversion (string) – Dot separated string of current version of the game\n\n\nFunction Information\nnone\n\nExample\nlocal v = GetVersion()\n--v is \"0.5.0\""
+    },
     "HasVersion": {
         "scope": "lua",
         "body": "HasVersion('${version}')",
         "prefix": "HasVersion",
         "description": "Arguments\nversion (string) – Reference version\n\n\nReturn value\nmatch (boolean) – True if current version is at least provided one\n\n\nFunction Information\nnone\n\nExample\nif HasVersion(\"0.6.0\") then\n\t--conditional code that only works on 0.6.0 or above\nelse\n\t--legacy code that works on earlier versions\nend"
+    },
+    "GetTime": {
+        "scope": "lua",
+        "body": "GetTime()",
+        "prefix": "GetTime",
+        "description": "Arguments\nnone\n\nReturn value\ntime (number) – The time in seconds since level was started\n\n\nFunction Information\nReturns running time of this script. If called from update, this returns the simulated time, otherwise it returns wall time.\n\nExample\nlocal t = GetTime()"
+    },
+    "GetTimeStep": {
+        "scope": "lua",
+        "body": "GetTimeStep()",
+        "prefix": "GetTimeStep",
+        "description": "Arguments\nnone\n\nReturn value\ndt (number) – The timestep in seconds\n\n\nFunction Information\nReturns timestep of the last frame. If called from update, this returns the simulation time step, which is always one 60th of a second (0.0166667). If called from tick or draw it returns the actual time since last frame.\n\nExample\nlocal dt = GetTimeStep()"
     },
     "InputPressed": {
         "scope": "lua",
@@ -55,21 +114,33 @@
     },
     "SetValue": {
         "scope": "lua",
-        "body": "SetValue('${variable}',${value},${transition},${time},${time})",
+        "body": "SetValue('${variable}',${value},transition,time,time)",
         "prefix": "SetValue",
         "description": "Arguments\nvariable (string) – Name of number variable in the global context\nvalue (number) – The new value\ntransition (string, optional) – Transition type. See description.\ntime (number, optional) – Transition time (seconds)\n\n\nReturn value\nnone\n\nFunction Information\nSet value of a number variable in the global context with an optional transition. If a transition is provided the value will animate from current value to the new value during the transition time. Transition can be one of the following:\n\nExample\nmyValue = 0\nSetValue(\"myValue\", 1, \"linear\", 0.5)\n\nThis will change the value of myValue from 0 to 1 in a linear fasion over 0.5 seconds"
     },
     "StartLevel": {
         "scope": "lua",
-        "body": "StartLevel('${mission}','${path}',${layers})",
+        "body": "StartLevel('${mission}','${path}',layers)",
         "prefix": "StartLevel",
         "description": "Arguments\nmission (string) – An identifier of your choice\npath (string) – Path to level XML file\nlayers (string, optional) – Active layers. Default is no layers.\n\n\nReturn value\nnone\n\nFunction Information\nStart a level\n\nExample\n--Start level with no active layers\nStartLevel(\"level1\", \"MOD/level1.xml\")\n\n--Start level with two layers\nStartLevel(\"level1\", \"MOD/level1.xml\", \"vehicles targets\")"
     },
     "SetPaused": {
         "scope": "lua",
-        "body": "SetPaused(${paused})",
+        "body": "SetPaused(paused)",
         "prefix": "SetPaused",
         "description": "Arguments\npaused (boolean) – True if game should be paused\n\n\nReturn value\nnone\n\nFunction Information\nSet paused state of the game\n\nExample\n--Pause game and bring up pause menu on HUD\nSetPaused(true)"
+    },
+    "Restart": {
+        "scope": "lua",
+        "body": "Restart()",
+        "prefix": "Restart",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nRestart level\n\nExample\nif shouldRestart then\nRestart()\nend"
+    },
+    "Menu": {
+        "scope": "lua",
+        "body": "Menu()",
+        "prefix": "Menu",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nGo to main menu\n\nExample\nif shouldExitLevel then\nMenu()\nend"
     },
     "ClearKey": {
         "scope": "lua",
@@ -115,7 +186,7 @@
     },
     "SetBool": {
         "scope": "lua",
-        "body": "SetBool('${key}',${value})",
+        "body": "SetBool('${key}',value)",
         "prefix": "SetBool",
         "description": "Arguments\nkey (string) – Registry key\nvalue (boolean) – Desired value\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nSetBool(\"level.robots.enabled\", true)"
     },
@@ -139,7 +210,7 @@
     },
     "Vec": {
         "scope": "lua",
-        "body": "Vec(${x},${y},${z})",
+        "body": "Vec(x,y,z)",
         "prefix": "Vec",
         "description": "Arguments\nx (number, optional) – X value\ny (number, optional) – Y value\nz (number, optional) – Z value\n\n\nReturn value\nvec (table) – New vector\n\n\nFunction Information\nCreate new vector and optionally initializes it to the provided values. A Vec is equivalent to a regular lua table with three numbers.\n\nExample\n--These are equivalent\nlocal a1 = Vec()\nlocal a2 = {0, 0, 0}\n\n--These are equivalent\nlocal b1 = Vec(0, 1, 0)\nlocal b2 = {0, 1, 0}"
     },
@@ -193,13 +264,13 @@
     },
     "VecLerp": {
         "scope": "lua",
-        "body": "VecLerp((${a}),(${b}),${t},${fraction})",
+        "body": "VecLerp((${a}),(${b}),${t},fraction)",
         "prefix": "VecLerp",
         "description": "Arguments\na (table) – Vector\nb (table) – Vector\nt (number) – fraction (usually between 0.0 and 1.0)\n\n\nReturn value\nc (table) – Linearly interpolated vector between a and b, using t\n\n\nFunction Information\nnone\n\nExample\nlocal a = Vec(2,0,0)\nlocal b = Vec(0,4,2)\nlocal t = 0.5\n\n--These two are equivalent\nlocal c1 = VecLerp(a, b, t)\nlcoal c2 = VecAdd(VecScale(a, 1-t), VecScale(b, t))\n\n--c1 and c2 now equals {1, 2, 1}"
     },
     "Quat": {
         "scope": "lua",
-        "body": "Quat(${x},${y},${z},${w})",
+        "body": "Quat(x,y,z,w)",
         "prefix": "Quat",
         "description": "Arguments\nx (number, optional) – X value\ny (number, optional) – Y value\nz (number, optional) – Z value\nw (number, optional) – W value\n\n\nReturn value\nquat (table) – New quaternion\n\n\nFunction Information\nCreate new quaternion and optionally initializes it to the provided values. Do not attempt to initialize a quaternion with raw values unless you know what you are doing. Use QuatEuler or QuatAxisAngle instead. If no arguments are given, a unit quaternion will be created: {0, 0, 0, 1}. A quaternion is equivalent to a regular lua table with four numbers.\n\nExample\n--These are equivalent\nlocal a1 = Quat()\nlocal a2 = {0, 0, 0, 1}"
     },
@@ -229,7 +300,7 @@
     },
     "QuatSlerp": {
         "scope": "lua",
-        "body": "QuatSlerp((${a}),(${b}),${t},${fraction})",
+        "body": "QuatSlerp((${a}),(${b}),${t},fraction)",
         "prefix": "QuatSlerp",
         "description": "Arguments\na (table) – Quaternion\nb (table) – Quaternion\nt (number) – fraction (usually between 0.0 and 1.0)\n\n\nReturn value\nc (table) – New quaternion\n\n\nFunction Information\nSpherical, linear interpolation between a and b, using t. This is very useful for animating between two rotations.\n\nExample\nlocal a = QuatEuler(0, 10, 0)\nlocal b = QuatEuler(0, 0, 45)\n\n--Create quaternion half way between a and b\nlocal q = QuatSlerp(a, b, 0.5)"
     },
@@ -241,7 +312,7 @@
     },
     "Transform": {
         "scope": "lua",
-        "body": "Transform(${pos},${rot})",
+        "body": "Transform(pos,rot)",
         "prefix": "Transform",
         "description": "Arguments\npos (table, optional) – Vector representing transform position\nrot (table, optional) – Quaternion representing transform rotation\n\n\nReturn value\ntransform (table) – New transform\n\n\nFunction Information\nA transform is a regular lua table with two entries: pos and rot, a vector and quaternion representing transform position and rotation.\n\nExample\n--Create transform located at {0, 0, 0} with no rotation\nlocal t1 = Transform()\n\n--Create transform located at {10, 0, 0} with no rotation\nlocal t2 = Transform(Vec(10, 0,0))\n\n--Create transform located at {10, 0, 0}, rotated 45 degrees around Y axis\nlocal t2 = Transform(Vec(10, 0,0), QuatEuler(0, 45, 0))"
     },
@@ -289,7 +360,7 @@
     },
     "SetTag": {
         "scope": "lua",
-        "body": "SetTag(${handle},'${tag}',${value})",
+        "body": "SetTag(${handle},'${tag}',value)",
         "prefix": "SetTag",
         "description": "Arguments\nhandle (number) – Entity handle\ntag (string) – Tag name\nvalue (string, optional) – Tag value\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\n--Add \"special\" tag to an entity\nSetTag(handle, \"special\")\n\n--Add \"team\" tag to an entity and give it value \"red\"\nSetTag(handle, \"team\", \"red\")"
     },
@@ -337,13 +408,13 @@
     },
     "FindBody": {
         "scope": "lua",
-        "body": "FindBody('${tag}',${global})",
+        "body": "FindBody('${tag}',global)",
         "prefix": "FindBody",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nhandle (number) – Handle to first body with specified tag or zero if not found\n\n\nFunction Information\nnone\n\nExample\n--Search for a body tagged \"target\" in script scope\nlocal target = FindBody(\"target\")\n\n--Search for a body tagged \"escape\" in entire scene\nlocal escape = FindBody(\"escape\", true)"
     },
     "FindBodies": {
         "scope": "lua",
-        "body": "FindBodies('${tag}',${global})",
+        "body": "FindBodies('${tag}',global)",
         "prefix": "FindBodies",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nlist (table) – Indexed table with handles to all bodies with specified tag\n\n\nFunction Information\nnone\n\nExample\n--Search for bodies tagged \"target\" in script scope\nlocal targets = FindBodies(\"target\")\nfor i=1, #targets do\n\tlocal target = targets[i]\n\t...\nend"
     },
@@ -373,37 +444,37 @@
     },
     "SetBodyDynamic": {
         "scope": "lua",
-        "body": "SetBodyDynamic(${handle},${dynamic})",
+        "body": "SetBodyDynamic(${handle},dynamic)",
         "prefix": "SetBodyDynamic",
         "description": "Arguments\nhandle (number) – Body handle\ndynamic (boolean) – True for dynamic. False for static.\n\n\nReturn value\nnone\n\nFunction Information\nChange the dynamic state of a body. There is very limited use for this function. In most situations you should leave it up to the engine to decide. Use with caution.\n\nExample\nSetBodyDynamic(body, false)"
     },
     "SetBodyVelocity": {
         "scope": "lua",
-        "body": "SetBodyVelocity(${handle},${handle},(${velocity}))",
+        "body": "SetBodyVelocity(${handle},handle,(${velocity}))",
         "prefix": "SetBodyVelocity",
         "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\nvelocity (table) – Vector with linear velocity\n\n\nReturn value\nnone\n\nFunction Information\nThis can be used for animating bodies with preserved physical interaction, but in most cases you are better off with a motorized joint instead.\n\nExample\nlocal vel = Vec(2,0,0)\nSetBodyVelocity(body, vel)"
     },
     "GetBodyVelocity": {
         "scope": "lua",
-        "body": "GetBodyVelocity(${handle},${handle})",
+        "body": "GetBodyVelocity(${handle},handle)",
         "prefix": "GetBodyVelocity",
         "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\n\n\nReturn value\nvelocity (table) – Linear velocity as vector\n\n\nFunction Information\nnone\n\nExample\nlocal linVel = GetBodyVelocity(body)"
     },
     "GetBodyVelocityAtPos": {
         "scope": "lua",
-        "body": "GetBodyVelocityAtPos(${handle},${handle},(${pos}))",
+        "body": "GetBodyVelocityAtPos(${handle},handle,(${pos}))",
         "prefix": "GetBodyVelocityAtPos",
         "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\npos (table) – World space point as vector\n\n\nReturn value\nvelocity (table) – Linear velocity on body at pos as vector\n\n\nFunction Information\nReturn the velocity on a body taking both linear and angular velocity into account.\n\nExample\nlocal vel = GetBodyVelocityAtPos(body, pos)"
     },
     "SetBodyAngularVelocity": {
         "scope": "lua",
-        "body": "SetBodyAngularVelocity(${handle},${handle},(${angVel}))",
+        "body": "SetBodyAngularVelocity(${handle},handle,(${angVel}))",
         "prefix": "SetBodyAngularVelocity",
         "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\nangVel (table) – Vector with angular velocity\n\n\nReturn value\nnone\n\nFunction Information\nThis can be used for animating bodies with preserved physical interaction, but in most cases you are better off with a motorized joint instead.\n\nExample\nlocal angVel = Vec(2,0,0)\nSetBodyAngularVelocity(body, angVel)"
     },
     "GetBodyAngularVelocity": {
         "scope": "lua",
-        "body": "GetBodyAngularVelocity(${handle},${handle})",
+        "body": "GetBodyAngularVelocity(${handle},handle)",
         "prefix": "GetBodyAngularVelocity",
         "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\n\n\nReturn value\nangVel (table) – Angular velocity as vector\n\n\nFunction Information\nnone\n\nExample\nlocal angVel = GetBodyAngularVelocity(body)"
     },
@@ -415,7 +486,7 @@
     },
     "ApplyBodyImpulse": {
         "scope": "lua",
-        "body": "ApplyBodyImpulse(${handle},${handle},(${position}),(${velocity}))",
+        "body": "ApplyBodyImpulse(${handle},handle,(${position}),(${velocity}))",
         "prefix": "ApplyBodyImpulse",
         "description": "Arguments\nhandle (number) – Body handle (should be a dynamic body)\nposition (table) – World space position as vector\nvelocity (table) – World space impulse as vector\n\n\nReturn value\nnone\n\nFunction Information\nApply impulse to dynamic body at position (give body a push).\n\nExample\nlocal pos = Vec(0,1,0)\nlocal imp = Vec(0,0,10)\nApplyBodyImpulse(body, pos, imp)"
     },
@@ -445,7 +516,7 @@
     },
     "IsBodyVisible": {
         "scope": "lua",
-        "body": "IsBodyVisible(${handle},${maxDist},${rejectTransparent})",
+        "body": "IsBodyVisible(${handle},${maxDist},rejectTransparent)",
         "prefix": "IsBodyVisible",
         "description": "Arguments\nhandle (number) – Body handle\nmaxDist (number) – Maximum visible distance\nrejectTransparent (boolean, optional) – See through transparent materials. Default false.\n\n\nReturn value\nvisible (boolean) – Return true if body is visible\n\n\nFunction Information\nThis will check if a body is currently visible in the camera frustum and not occluded by other objects.\n\nExample\nif IsBodyVisible(body, 25) then\n\t--Body is within 25 meters visible to the camera\nend"
     },
@@ -463,7 +534,7 @@
     },
     "DrawBodyOutline": {
         "scope": "lua",
-        "body": "DrawBodyOutline(${handle},${r},${g},${b},${a})",
+        "body": "DrawBodyOutline(${handle},r,g,b,${a})",
         "prefix": "DrawBodyOutline",
         "description": "Arguments\nhandle (number) – Body handle\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number) – Alpha\n\n\nReturn value\nnone\n\nFunction Information\nRender next frame with an outline around specified body. If no color is given, a white outline will be drawn.\n\nExample\n--Draw white outline at 50% transparency\nDrawBodyOutline(body, 0.5)\n\n--Draw green outline, fully opaque\nDrawBodyOutline(body, 0, 1, 0, 1)"
     },
@@ -475,13 +546,13 @@
     },
     "FindShape": {
         "scope": "lua",
-        "body": "FindShape('${tag}',${global})",
+        "body": "FindShape('${tag}',global)",
         "prefix": "FindShape",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nhandle (number) – Handle to first shape with specified tag or zero if not found\n\n\nFunction Information\nnone\n\nExample\n--Search for a shape tagged \"mybox\" in script scope\nlocal target = FindShape(\"mybox\")\n\n--Search for a shape tagged \"laserturret\" in entire scene\nlocal escape = FindBody(\"laserturret\", true)"
     },
     "FindShapes": {
         "scope": "lua",
-        "body": "FindShapes('${tag}',${global})",
+        "body": "FindShapes('${tag}',global)",
         "prefix": "FindShapes",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nlist (table) – Indexed table with handles to all shapes with specified tag\n\n\nFunction Information\nnone\n\nExample\n--Search for shapes tagged \"alarmbox\" in script scope\nlocal shapes = FindShapes(\"alarmbox\")\nfor i=1, #shapes do\n\tlocal shape = shapes[i]\n\t...\nend"
     },
@@ -553,7 +624,7 @@
     },
     "IsShapeVisible": {
         "scope": "lua",
-        "body": "IsShapeVisible(${handle},${maxDist},${rejectTransparent})",
+        "body": "IsShapeVisible(${handle},${maxDist},rejectTransparent)",
         "prefix": "IsShapeVisible",
         "description": "Arguments\nhandle (number) – Shape handle\nmaxDist (number) – Maximum visible distance\nrejectTransparent (boolean, optional) – See through transparent materials. Default false.\n\n\nReturn value\nvisible (boolean) – Return true if shape is visible\n\n\nFunction Information\nThis will check if a shape is currently visible in the camera frustum and not occluded by other objects.\n\nExample\nif IsShapeVisible(shape, 25) then\n\t--Shape is within 25 meters visible to the camera\nend"
     },
@@ -565,7 +636,7 @@
     },
     "DrawShapeOutline": {
         "scope": "lua",
-        "body": "DrawShapeOutline(${handle},${r},${g},${b},${a})",
+        "body": "DrawShapeOutline(${handle},r,g,b,${a})",
         "prefix": "DrawShapeOutline",
         "description": "Arguments\nhandle (number) – Shape handle\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number) – Alpha\n\n\nReturn value\nnone\n\nFunction Information\nRender next frame with an outline around specified shape. If no color is given, a white outline will be drawn.\n\nExample\n--Draw white outline at 50% transparency\nDrawShapeOutline(shape, 0.5)\n\n--Draw green outline, fully opaque\nDrawShapeOutline(shape, 0, 1, 0, 1)"
     },
@@ -577,13 +648,13 @@
     },
     "FindLocation": {
         "scope": "lua",
-        "body": "FindLocation('${tag}',${global})",
+        "body": "FindLocation('${tag}',global)",
         "prefix": "FindLocation",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nhandle (number) – Handle to first location with specified tag or zero if not found\n\n\nFunction Information\nnone\n\nExample\nlocal loc = FindLocation(\"start\")"
     },
     "FindLocations": {
         "scope": "lua",
-        "body": "FindLocations('${tag}',${global})",
+        "body": "FindLocations('${tag}',global)",
         "prefix": "FindLocations",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nlist (table) – Indexed table with handles to all locations with specified tag\n\n\nFunction Information\nnone\n\nExample\n--Search for locations tagged \"waypoint\" in script scope\nlocal locations = FindLocations(\"waypoint\")\nfor i=1, #locs do\n\tlocal locs = locations[i]\n\t...\nend"
     },
@@ -595,13 +666,13 @@
     },
     "FindJoint": {
         "scope": "lua",
-        "body": "FindJoint('${tag}',${global})",
+        "body": "FindJoint('${tag}',global)",
         "prefix": "FindJoint",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nhandle (number) – Handle to first joint with specified tag or zero if not found\n\n\nFunction Information\nnone\n\nExample\nlocal joint = FindLocation(\"doorhinge\")"
     },
     "FindJoints": {
         "scope": "lua",
-        "body": "FindJoints('${tag}',${global})",
+        "body": "FindJoints('${tag}',global)",
         "prefix": "FindJoints",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nlist (table) – Indexed table with handles to all joints with specified tag\n\n\nFunction Information\nnone\n\nExample\n--Search for locations tagged \"doorhinge\" in script scope\nlocal hinges = FindLocations(\"doorhinge\")\nfor i=1, #hinges do\n\tlocal joint = hinges[i]\n\t...\nend"
     },
@@ -625,13 +696,13 @@
     },
     "SetJointMotor": {
         "scope": "lua",
-        "body": "SetJointMotor(${joint},${velocity},${strength})",
+        "body": "SetJointMotor(${joint},${velocity},strength)",
         "prefix": "SetJointMotor",
         "description": "Arguments\njoint (number) – Joint handle\nvelocity (number) – Desired velocity\nstrength (number, optional) – Desired strength. Default is infinite. Zero to disable.\n\n\nReturn value\nnone\n\nFunction Information\nSet joint motor target velocity. If joint is of type hinge, velocity is given in radians per second angular velocity. If joint type is prismatic joint velocity is given in meters per second. Calling this function will override and void any previous call to SetJointMotorTarget.\n\nExample\n--Set motor speed to 0.5 radians per second\nSetJointMotor(hinge, 0.5)"
     },
     "SetJointMotorTarget": {
         "scope": "lua",
-        "body": "SetJointMotorTarget(${joint},${target},${maxVel},${strength})",
+        "body": "SetJointMotorTarget(${joint},${target},maxVel,strength)",
         "prefix": "SetJointMotorTarget",
         "description": "Arguments\njoint (number) – Joint handle\ntarget (number) – Desired movement target\nmaxVel (number, optional) – Maximum velocity to reach target. Default is infinite.\nstrength (number, optional) – Desired strength. Default is infinite. Zero to disable.\n\n\nReturn value\nnone\n\nFunction Information\nIf a joint has a motor target, it will try to maintain its relative movement. This is very useful for elevators or other animated, jointed mechanisms. If joint is of type hinge, target is an angle in degrees (-180 to 180) and velocity is given in radians per second. If joint type is prismatic, target is given in meters and velocity is given in meters per second. Setting a motor target will override any previous call to SetJointMotor.\n\nExample\n--Make joint reach a 45 degree angle, going at a maximum of 3 radians per second\nSetJointMotorTarget(hinge, 45, 3)"
     },
@@ -649,19 +720,19 @@
     },
     "FindLight": {
         "scope": "lua",
-        "body": "FindLight('${tag}',${global})",
+        "body": "FindLight('${tag}',global)",
         "prefix": "FindLight",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nhandle (number) – Handle to first light with specified tag or zero if not found\n\n\nFunction Information\nnone\n\nExample\nlocal light = FindLight(\"main\")"
     },
     "FindLights": {
         "scope": "lua",
-        "body": "FindLights('${tag}',${global})",
+        "body": "FindLights('${tag}',global)",
         "prefix": "FindLights",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nlist (table) – Indexed table with handles to all lights with specified tag\n\n\nFunction Information\nnone\n\nExample\n--Search for lights tagged \"main\" in script scope\nlocal lights = FindLights(\"main\")\nfor i=1, #lights do\n\tlocal light = lights[i]\n\t...\nend"
     },
     "SetLightEnabled": {
         "scope": "lua",
-        "body": "SetLightEnabled(${handle},${enabled})",
+        "body": "SetLightEnabled(${handle},enabled)",
         "prefix": "SetLightEnabled",
         "description": "Arguments\nhandle (number) – Light handle\nenabled (boolean) – Set to true if light should be enabled\n\n\nReturn value\nnone\n\nFunction Information\nIf light is owned by a shape, the emissive scale of that shape will be set to 0.0 when light is disabled and 1.0 when light is enabled.\n\nExample\nSetLightEnabled(light, false)"
     },
@@ -697,13 +768,13 @@
     },
     "FindTrigger": {
         "scope": "lua",
-        "body": "FindTrigger('${tag}',${global})",
+        "body": "FindTrigger('${tag}',global)",
         "prefix": "FindTrigger",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nhandle (number) – Handle to first trigger with specified tag or zero if not found\n\n\nFunction Information\nnone\n\nExample\nlocal goal = FindTrigger(\"goal\")"
     },
     "FindTriggers": {
         "scope": "lua",
-        "body": "FindTriggers('${tag}',${global})",
+        "body": "FindTriggers('${tag}',global)",
         "prefix": "FindTriggers",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nlist (table) – Indexed table with handles to all triggers with specified tag\n\n\nFunction Information\nnone\n\nExample\n--Find triggers tagged \"toxic\" in script scope\nlocal triggers = FindTriggers(\"toxic\")\nfor i=1, #triggers do\n\tlocal trigger = triggers[i]\n\t...\nend"
     },
@@ -745,25 +816,25 @@
     },
     "IsTriggerEmpty": {
         "scope": "lua",
-        "body": "IsTriggerEmpty(${handle},${demolision})",
+        "body": "IsTriggerEmpty(${handle},demolision)",
         "prefix": "IsTriggerEmpty",
         "description": "Arguments\nhandle (number) – Trigger handle\ndemolision (boolean, optional) – If true, small debris and vehicles are ignored\n\n\nReturn value\nempty (boolean) – True if trigger is empty\nmaxpoint (table) – World space point of highest point (largest Y coordinate) if not empty\n\n\nFunction Information\nThis function will check if trigger is empty. If trigger contains any part of a body it will return false and the highest point as second return value.\n\nExample\nlocal empty, highPoint = IsTriggerEmpty(trigger)\nif not empty then\n\t--highPoint[2] is the tallest point in trigger\nend"
     },
     "FindScreen": {
         "scope": "lua",
-        "body": "FindScreen('${tag}',${global})",
+        "body": "FindScreen('${tag}',global)",
         "prefix": "FindScreen",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nhandle (number) – Handle to first screen with specified tag or zero if not found\n\n\nFunction Information\nnone\n\nExample\nlocal screen = FindTrigger(\"tv\")"
     },
     "FindScreens": {
         "scope": "lua",
-        "body": "FindScreens('${tag}',${global})",
+        "body": "FindScreens('${tag}',global)",
         "prefix": "FindScreens",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nlist (table) – Indexed table with handles to all screens with specified tag\n\n\nFunction Information\nnone\n\nExample\n--Find screens tagged \"tv\" in script scope\nlocal screens = FindScreens(\"tv\")\nfor i=1, #screens do\n\tlocal screen = screens[i]\n\t...\nend"
     },
     "SetScreenEnabled": {
         "scope": "lua",
-        "body": "SetScreenEnabled(${screen},${enabled})",
+        "body": "SetScreenEnabled(${screen},enabled)",
         "prefix": "SetScreenEnabled",
         "description": "Arguments\nscreen (number) – Screen handle\nenabled (boolean) – True if screen should be enabled\n\n\nReturn value\nnone\n\nFunction Information\nEnable or disable screen\n\nExample\nSetScreenEnabled(screen, true)"
     },
@@ -781,13 +852,13 @@
     },
     "FindVehicle": {
         "scope": "lua",
-        "body": "FindVehicle('${tag}',${global})",
+        "body": "FindVehicle('${tag}',global)",
         "prefix": "FindVehicle",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nhandle (number) – Handle to first vehicle with specified tag or zero if not found\n\n\nFunction Information\nnone\n\nExample\nlocal vehicle = FindVehicle(\"mycar\")"
     },
     "FindVehicles": {
         "scope": "lua",
-        "body": "FindVehicles('${tag}',${global})",
+        "body": "FindVehicles('${tag}',global)",
         "prefix": "FindVehicles",
         "description": "Arguments\ntag (string) – Tag name\nglobal (boolean, optional) – Search in entire scene\n\n\nReturn value\nlist (table) – Indexed table with handles to all vehicles with specified tag\n\n\nFunction Information\nnone\n\nExample\n--Find all vehicles in level tagged \"boat\"\nlocal boats = FindVehicles(\"boat\")\nfor i=1, #boats do\n\tlocal boat = boats[i]\n\t...\nend"
     },
@@ -817,9 +888,21 @@
     },
     "DriveVehicle": {
         "scope": "lua",
-        "body": "DriveVehicle(${vehicle},${drive},${steering},${handbrake})",
+        "body": "DriveVehicle(${vehicle},${drive},${steering},handbrake)",
         "prefix": "DriveVehicle",
         "description": "Arguments\nvehicle (number) – Vehicle handle\ndrive (number) – Reverse/forward control -1 to 1\nsteering (number) – Left/right control -1 to 1\nhandbrake (boolean) – Handbrake control\n\n\nReturn value\nnone\n\nFunction Information\nThis function applies input to vehicles, allowing for autonomous driving. The vehicle will be turned on automatically and turned off when no longer called. Call this from the tick function, not update.\n\nExample\nfunction tick()\n\t--Drive mycar forwards\n\tlocal v = FindVehicle(\"mycar\")\n\tDriveVehicle(v, 1, 0, false)\nend"
+    },
+    "GetPlayerPos": {
+        "scope": "lua",
+        "body": "GetPlayerPos()",
+        "prefix": "GetPlayerPos",
+        "description": "Arguments\nnone\n\nReturn value\nposition (table) – Player center position\n\n\nFunction Information\nReturn center point of player. This function is deprecated. Use GetPlayerTransform instead.\n\nExample\nlocal p = GetPlayerPos()\n\n--This is equivalent to\np = VecAdd(GetPlayerTransform().pos, Vec(0,1,0))"
+    },
+    "GetPlayerTransform": {
+        "scope": "lua",
+        "body": "GetPlayerTransform()",
+        "prefix": "GetPlayerTransform",
+        "description": "Arguments\nnone\n\nReturn value\ntransform (table) – Current player transform\n\n\nFunction Information\nThe player transform is located at the bottom of the player. The player transform considers heading (looking left and right). Forward is along negative Z axis. Player pitch (looking up and down) does not affect player transform. If you want the transform of the eye, use GetPlayerCameraTransform() instead.\n\nExample\nlocal t = GetPlayerTransform()"
     },
     "SetPlayerTransform": {
         "scope": "lua",
@@ -827,15 +910,27 @@
         "prefix": "SetPlayerTransform",
         "description": "Arguments\ntransform (table) – Desired player transform\n\n\nReturn value\nnone\n\nFunction Information\nInstantly teleport the player to desired transform. Player velocity and up/down look angle will be set to zero during this process.\n\nExample\nlocal t = Transform(Vec(10, 0, 0), QuatEuler(0, 90, 0))\nSetPlayerTransform(t)"
     },
+    "GetPlayerCameraTransform": {
+        "scope": "lua",
+        "body": "GetPlayerCameraTransform()",
+        "prefix": "GetPlayerCameraTransform",
+        "description": "Arguments\nnone\n\nReturn value\ntransform (table) – Current player camera transform\n\n\nFunction Information\nThe player camera transform is usually the same as what you get from GetCameraTransform, but if you have set a camera transform manually with SetCameraTransform, you can retrieve the standard player camera transform with this function.\n\nExample\nlocal t = GetPlayerCameraTransform()"
+    },
     "SetPlayerSpawnTransform": {
         "scope": "lua",
         "body": "SetPlayerSpawnTransform((${transform}))",
         "prefix": "SetPlayerSpawnTransform",
         "description": "Arguments\ntransform (table) – Desired player spawn transform\n\n\nReturn value\nnone\n\nFunction Information\nCall this function during init to alter the player spawn transform.\n\nExample\nlocal t = Transform(Vec(10, 0, 0), QuatEuler(0, 90, 0))\nSetPlayerSpawnTransform(t)"
     },
+    "GetPlayerVelocity": {
+        "scope": "lua",
+        "body": "GetPlayerVelocity()",
+        "prefix": "GetPlayerVelocity",
+        "description": "Arguments\nnone\n\nReturn value\nvelocity (table) – Player velocity in world space as vector\n\n\nFunction Information\nnone\n\nExample\nlocal vel = GetPlayerVelocity()"
+    },
     "SetPlayerVehicle": {
         "scope": "lua",
-        "body": "SetPlayerVehicle(${vehicle})",
+        "body": "SetPlayerVehicle(vehicle)",
         "prefix": "SetPlayerVehicle",
         "description": "Arguments\nvehicle (value) – Handle to vehicle or zero to not drive.\n\n\nReturn value\nnone\n\nFunction Information\nDrive specified vehicle.\n\nExample\nlocal car = FindVehicle(\"mycar\")\nSetPlayerVehicle(car)"
     },
@@ -845,23 +940,89 @@
         "prefix": "SetPlayerVelocity",
         "description": "Arguments\nvelocity (table) – Player velocity in world space as vector\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nSetPlayerVelocity(Vec(0, 5, 0))"
     },
+    "GetPlayerVehicle": {
+        "scope": "lua",
+        "body": "GetPlayerVehicle()",
+        "prefix": "GetPlayerVehicle",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Current vehicle handle, or zero if not in vehicle\n\n\nFunction Information\nnone\n\nExample\nlocal vehicle = GetPlayerVehicle()\nif vehicle ~= 0 then\n\t...\nend"
+    },
+    "GetPlayerGrabShape": {
+        "scope": "lua",
+        "body": "GetPlayerGrabShape()",
+        "prefix": "GetPlayerGrabShape",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to grabbed shape or zero if not grabbing.\n\n\nFunction Information\nnone\n\nExample\nlocal shape = GetPlayerGrabShape()\nif shape ~= 0 then\n\t...\nend"
+    },
+    "GetPlayerGrabBody": {
+        "scope": "lua",
+        "body": "GetPlayerGrabBody()",
+        "prefix": "GetPlayerGrabBody",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to grabbed body or zero if not grabbing.\n\n\nFunction Information\nnone\n\nExample\nlocal body = GetPlayerGrabBody()\nif body ~= 0 then\n\t...\nend"
+    },
+    "GetPlayerPickShape": {
+        "scope": "lua",
+        "body": "GetPlayerPickShape()",
+        "prefix": "GetPlayerPickShape",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to picked shape or zero if nothing is picked\n\n\nFunction Information\nnone\n\nExample\nlocal shape = GetPlayerPickShape()\nif shape ~= 0 then\n\t...\nend"
+    },
+    "GetPlayerPickBody": {
+        "scope": "lua",
+        "body": "GetPlayerPickBody()",
+        "prefix": "GetPlayerPickBody",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to picked body or zero if nothing is picked\n\n\nFunction Information\nnone\n\nExample\nlocal body = GetPlayerPickBody()\nif body ~= 0 then\n\t...\nend"
+    },
+    "GetPlayerInteractShape": {
+        "scope": "lua",
+        "body": "GetPlayerInteractShape()",
+        "prefix": "GetPlayerInteractShape",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to interactable shape or zero\n\n\nFunction Information\nInteractable shapes has to be tagged with \"interact\". The engine determines which interactable shape is currently interactable.\n\nExample\nlocal shape = GetPlayerInteractShape()\nif shape ~= 0 then\n\t...\nend"
+    },
+    "GetPlayerInteractBody": {
+        "scope": "lua",
+        "body": "GetPlayerInteractBody()",
+        "prefix": "GetPlayerInteractBody",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to interactable body or zero\n\n\nFunction Information\nInteractable shapes has to be tagged with \"interact\". The engine determines which interactable body is currently interactable.\n\nExample\nlocal body = GetPlayerInteractBody()\nif body ~= 0 then\n\t...\nend"
+    },
     "SetPlayerScreen": {
         "scope": "lua",
         "body": "SetPlayerScreen(${handle})",
         "prefix": "SetPlayerScreen",
         "description": "Arguments\nhandle (number) – Handle to screen or zero for no screen\n\n\nReturn value\nnone\n\nFunction Information\nSet the screen the player should interact with. For the screen to feature a mouse pointer and receieve input, the screen also needs to have interactive property.\n\nExample\n--Interact with screen\nSetPlayerScreen(screen)\n\n--Do not interact with screen\nSetPlayerScreen(0)"
     },
+    "GetPlayerScreen": {
+        "scope": "lua",
+        "body": "GetPlayerScreen()",
+        "prefix": "GetPlayerScreen",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to interacted screen or zero if none\n\n\nFunction Information\nnone\n\nExample\n--Interact with screen\nlocal screen = GetPlayerScreen()"
+    },
     "SetPlayerHealth": {
         "scope": "lua",
-        "body": "SetPlayerHealth(${health},${health})",
+        "body": "SetPlayerHealth(${health},health)",
         "prefix": "SetPlayerHealth",
         "description": "Arguments\nhealth (number) – Set player health (between zero and one)\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nSetPlayerHealth(0.5)"
+    },
+    "GetPlayerHealth": {
+        "scope": "lua",
+        "body": "GetPlayerHealth()",
+        "prefix": "GetPlayerHealth",
+        "description": "Arguments\nnone\n\nReturn value\nhealth (number) – Current player health\n\n\nFunction Information\nnone\n\nExample\nlocal health = GetPlayerHealth()"
+    },
+    "RespawnPlayer": {
+        "scope": "lua",
+        "body": "RespawnPlayer()",
+        "prefix": "RespawnPlayer",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nRespawn player at spawn position without modifying the scene\n\nExample\nRespawnPlayer()"
     },
     "RegisterTool": {
         "scope": "lua",
         "body": "RegisterTool('${id}','${name}','${file}')",
         "prefix": "RegisterTool",
         "description": "Arguments\nid (string) – Tool unique identifier\nname (string) – Tool name to show in hud\nfile (string) – Path to vox file\n\n\nReturn value\nnone\n\nFunction Information\nRegister a custom tool that will show up in the player inventory and can be selected with scroll wheel. Do this only once per tool. You also need to enable the tool in the registry before it can be used.\n\nExample\nfunction init()\n\tRegisterTool(\"lasergun\", \"Laser Gun\", \"MOD/vox/lasergun.vox\")\n\tSetBool(\"game.tool.lasergun.enabled\", true)\nend\n\nfunction tick()\n\tif GetString(\"game.player.tool\") == \"lasergun\" then\n\t\t--Tool is selected. Tool logic goes here.\n\tend\nend"
+    },
+    "GetToolBody": {
+        "scope": "lua",
+        "body": "GetToolBody()",
+        "prefix": "GetToolBody",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to currently visible tool body or zero if none\n\n\nFunction Information\nReturn body handle of the visible tool. You can use this to retrieve tool shapes and animate them, change emissiveness, etc. Do not attempt to set the tool body transform, since it is controlled by the engine. Use SetToolTranform for that.\n\nExample\nlocal toolBody = GetToolBody()\nif toolBody~=0 then\n\t...\nend"
     },
     "SetToolTransform": {
         "scope": "lua",
@@ -883,13 +1044,13 @@
     },
     "PlaySound": {
         "scope": "lua",
-        "body": "PlaySound(${handle},${pos},${volume})",
+        "body": "PlaySound(${handle},pos,volume)",
         "prefix": "PlaySound",
         "description": "Arguments\nhandle (number) – Sound handle\npos (table, optional) – World position as vector. Default is player position.\nvolume (number, optional) – Playback volume. Default is 1.0\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nfunction init()\n\tsnd = LoadSound(\"beep.ogg\")\nend\n\nfunction tick()\n\tif trigSound then\n\t\tlocal pos = Vec(100, 0, 0)\n\t\tPlaySound(snd, pos, 0.5)\n\tend\nend"
     },
     "PlayLoop": {
         "scope": "lua",
-        "body": "PlayLoop(${handle},${pos},${volume})",
+        "body": "PlayLoop(${handle},pos,volume)",
         "prefix": "PlayLoop",
         "description": "Arguments\nhandle (number) – Loop handle\npos (table, optional) – World position as vector. Default is player position.\nvolume (number, optional) – Playback volume. Default is 1.0\n\n\nReturn value\nnone\n\nFunction Information\nCall this function continuously to play loop\n\nExample\nfunction init()\n\tloop = LoadLoop(\"siren.ogg\")\nend\n\nfunction tick()\n\tlocal pos = Vec(100, 0, 0)\n\tPlayLoop(loop, pos, 0.5)\nend"
     },
@@ -899,6 +1060,12 @@
         "prefix": "PlayMusic",
         "description": "Arguments\npath (string) – Music path\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nPlayMusic(\"MOD/music/background.ogg\")"
     },
+    "StopMusic": {
+        "scope": "lua",
+        "body": "StopMusic()",
+        "prefix": "StopMusic",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nStopMusic()"
+    },
     "LoadSprite": {
         "scope": "lua",
         "body": "LoadSprite('${path}')",
@@ -907,7 +1074,7 @@
     },
     "DrawSprite": {
         "scope": "lua",
-        "body": "DrawSprite(${handle},(${transform}),${width},${height},${r},${g},${b},${a},${depthTest},${additive})",
+        "body": "DrawSprite(${handle},(${transform}),${width},${height},${r},${g},${b},${a},depthTest,additive)",
         "prefix": "DrawSprite",
         "description": "Arguments\nhandle (number) – Sprite handle\ntransform (table) – Transform\nwidth (number) – Width in meters\nheight (number) – Height in meters\nr (number) – Red color\ng (number) – Green color\nb (number) – Blue color\na (number) – Alpha\ndepthTest (boolean, optional) – Depth test enabled. Default false.\nadditive (boolean, optional) – Additive blending enabled. Default false.\n\n\nReturn value\nnone\n\nFunction Information\nDraw sprite in world at next frame. Call this function from the tick callback.\n\nExample\nfunction init()\n\tarrow = LoadSprite(\"arrow.png\")\nend\n\nfunction tick()\n\t--Draw sprite using transform\n\t--Size is two meters in width and height\n\t--Color is white, fully opaue\n\tlocal t = Transform(Vec(0, 10, 0), QuatEuler(0, GetTime(), 0))\n\tDrawSprite(arrow, t, 2, 2, 1, 1, 1, 1)\nend"
     },
@@ -937,7 +1104,7 @@
     },
     "QueryRaycast": {
         "scope": "lua",
-        "body": "QueryRaycast((${origin}),(${direction}),${maxDist},${radius},${rejectTransparent})",
+        "body": "QueryRaycast((${origin}),(${direction}),${maxDist},radius,rejectTransparent)",
         "prefix": "QueryRaycast",
         "description": "Arguments\norigin (table) – Raycast origin as world space vector\ndirection (table) – Unit length raycast direction as world space vector\nmaxDist (number) – Raycast maximum distance. Keep this as low as possible for good performance.\nradius (number, optional) – Raycast thickness. Default zero.\nrejectTransparent (boolean, optional) – Raycast through transparent materials. Default false.\n\n\nReturn value\nhit (boolean) – True if raycast hit something\ndist (number) – Hit distance from origin\nnormal (table) – World space normal at hit point\nshape (number) – Handle to hit shape\n\n\nFunction Information\nThis will perform a raycast or spherecast (if radius is more than zero) query. If you want to set up a filter for the query you need to do so before every call to this function.\n\nExample\n--Raycast from a high point straight downwards, excluding a specific vehicle\nQueryRejectVehicle(vehicle)\nlocal hit, d = QueryRaycast(Vec(0, 100, 0), Vec(0, -1, 0), 100)\nif hit then\n\t...hit something at distance d\nend"
     },
@@ -959,6 +1126,12 @@
         "prefix": "QueryAabbBodies",
         "description": "Arguments\nmin (table) – Aabb minimum point\nmax (table) – Aabb maximum point\n\n\nReturn value\nlist (table) – Indexed table with handles to all bodies in the aabb\n\n\nFunction Information\nReturn all bodies within the provided world space, axis-aligned bounding box\n\nExample\nlocal list = QueryAabbBodies(Vec(0, 0, 0), Vec(10, 10, 10))\nfor i=1, #list do\n\tlocal body = list[i]\n\t..\nend"
     },
+    "GetLastSound": {
+        "scope": "lua",
+        "body": "GetLastSound()",
+        "prefix": "GetLastSound",
+        "description": "Arguments\nnone\n\nReturn value\nvolume (number) – Volume of loudest sound played last frame\nposition (table) – World position of loudest sound played last frame\n\n\nFunction Information\nnone\n\nExample\nlocal vol, pos = GetLastSound()"
+    },
     "IsPointInWater": {
         "scope": "lua",
         "body": "IsPointInWater((${point}))",
@@ -967,13 +1140,13 @@
     },
     "Shoot": {
         "scope": "lua",
-        "body": "Shoot((${origin}),(${direction}),${type},${bullet})",
+        "body": "Shoot((${origin}),(${direction}),type,bullet)",
         "prefix": "Shoot",
         "description": "Arguments\norigin (table) – Origin in world space as vector\ndirection (table) – Unit length direction as world space vector\ntype (number, optional) – 0 is regular bullet (default) and 1 is rocket\n\n\nReturn value\nnone\n\nFunction Information\nShoot bullet or rocket (used for chopper)\n\nExample\nShoot(Vec(0, 10, 0), Vec(0, 0, 1))"
     },
     "MakeHole": {
         "scope": "lua",
-        "body": "MakeHole((${position}),${r0},${r1},${r2},${silent})",
+        "body": "MakeHole((${position}),${r0},r1,r2,silent)",
         "prefix": "MakeHole",
         "description": "Arguments\nposition (table) – Hole center point\nr0 (number) – Hole radius for soft materials\nr1 (number, optional) – Hole radius for medium materials. May not be bigger than r0. Default zero.\nr2 (number, optional) – Hole radius for hard materials. May not be bigger than r1. Default zero.\nsilent (boolean, optional) – Make hole without playing any break sounds.\n\n\nReturn value\nnone\n\nFunction Information\nMake a hole in the environment. Radius is given in meters. Soft materials: glass, foliage, dirt, wood, plaster and plastic. Medium materials: concrete, brick and weak metal. Hard materials: hard metal and hard masonry.\n\nExample\nMakeHole(pos, 1.2, 1.0)"
     },
@@ -985,7 +1158,7 @@
     },
     "SpawnParticle": {
         "scope": "lua",
-        "body": "SpawnParticle('${type}',(${origin}),(${velocity}),${vector},${size},${particle},${life},${particle})",
+        "body": "SpawnParticle('${type}',(${origin}),(${velocity}),vector,${size},particle,${life},particle)",
         "prefix": "SpawnParticle",
         "description": "Arguments\ntype (string) – Type of particle: \"smoke\", \"darksmoke\", \"fire\" or \"water\"\norigin (table) – Origon in world space as vector\nvelocity (table) – Velocity in world space as vector (m/s)\nsize (number) – Size of particle (meters)\nlife (number) – Lifetime of particle (seconds)\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nSpawnParticle(\"smoke\", Vec(0, 10, 0), Vec(0, 1, 0), 2, 5)"
     },
@@ -995,15 +1168,27 @@
         "prefix": "SpawnFire",
         "description": "Arguments\npos (table) – Position in world space as vector\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nSpawnFire(Vec(0, 10, 0))"
     },
+    "GetFireCount": {
+        "scope": "lua",
+        "body": "GetFireCount()",
+        "prefix": "GetFireCount",
+        "description": "Arguments\nnone\n\nReturn value\ncount (number) – Number of active fires in level\n\n\nFunction Information\nnone\n\nExample\nlocal c = GetFireCount()"
+    },
+    "GetCameraTransform": {
+        "scope": "lua",
+        "body": "GetCameraTransform()",
+        "prefix": "GetCameraTransform",
+        "description": "Arguments\nnone\n\nReturn value\ntransform (table) – Current camera transform\n\n\nFunction Information\nnone\n\nExample\nlocal t = GetCameraTransform()"
+    },
     "SetCameraTransform": {
         "scope": "lua",
-        "body": "SetCameraTransform((${transform}),${fov},${degrees})",
+        "body": "SetCameraTransform((${transform}),fov,degrees)",
         "prefix": "SetCameraTransform",
         "description": "Arguments\ntransform (table) – Desired camera transform\nfov (number, optional) – Optional horizontal field of view in degrees (default: 90)\n\n\nReturn value\nnone\n\nFunction Information\nOverride current camera transform for this frame. Call continuously to keep overriding.\n\nExample\nSetCameraTransform(Transform(Vec(0, 10, 0), QuatEuler(0, 90, 0)))"
     },
     "PointLight": {
         "scope": "lua",
-        "body": "PointLight((${pos}),${r},${g},${b},${intensity})",
+        "body": "PointLight((${pos}),${r},${g},${b},intensity)",
         "prefix": "PointLight",
         "description": "Arguments\npos (table) – World space light position\nr (number) – Red\ng (number) – Green\nb (number) – Blue\nintensity (number, optional) – Intensity. Default is 1.0.\n\n\nReturn value\nnone\n\nFunction Information\nAdd a temporary point light to the world for this frame. Call continuously for a steady light.\n\nExample\n--Pulsating, yellow light above world origo\nlocal intensity = 3 + math.sin(GetTime())\nPointLight(Vec(0, 5, 0), 1, 1, 0, intensity)"
     },
@@ -1015,19 +1200,19 @@
     },
     "DrawLine": {
         "scope": "lua",
-        "body": "DrawLine((${p0}),(${p1}),${r},${g},${b},${a})",
+        "body": "DrawLine((${p0}),(${p1}),r,g,b,a)",
         "prefix": "DrawLine",
         "description": "Arguments\np0 (table) – World space point as vector\np1 (table) – World space point as vector\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number, optional) – Alpha\n\n\nReturn value\nnone\n\nFunction Information\nDraw a 3D line. In contrast to DrawDebugLine, it will not show behind objects. Default color is white.\n\nExample\n--Draw white debug line\nDrawLine(Vec(0, 0, 0), Vec(-10, 5, -10))\n\n--Draw red debug line\nDrawLine(Vec(0, 0, 0), Vec(10, 5, 10), 1, 0, 0)"
     },
     "DebugLine": {
         "scope": "lua",
-        "body": "DebugLine((${p0}),(${p1}),${r},${g},${b},${a})",
+        "body": "DebugLine((${p0}),(${p1}),r,g,b,a)",
         "prefix": "DebugLine",
         "description": "Arguments\np0 (table) – World space point as vector\np1 (table) – World space point as vector\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number, optional) – Alpha\n\n\nReturn value\nnone\n\nFunction Information\nDraw a 3D debug overlay line in the world. Default color is white.\n\nExample\n--Draw white debug line\nDebugLine(Vec(0, 0, 0), Vec(-10, 5, -10))\n\n--Draw red debug line\nDebugLine(Vec(0, 0, 0), Vec(10, 5, 10), 1, 0, 0)"
     },
     "DebugCross": {
         "scope": "lua",
-        "body": "DebugCross((${p0}),${r},${g},${b},${a})",
+        "body": "DebugCross((${p0}),r,g,b,a)",
         "prefix": "DebugCross",
         "description": "Arguments\np0 (table) – World space point as vector\nr (number, optional) – Red\ng (number, optional) – Green\nb (number, optional) – Blue\na (number, optional) – Alpha\n\n\nReturn value\nnone\n\nFunction Information\nDraw a debug cross in the world to highlight a location. Default color is white.\n\nExample\nDebugCross(Vec(10, 5, 5))"
     },
@@ -1043,15 +1228,61 @@
         "prefix": "DebugPrint",
         "description": "Arguments\nmessage (string) – Message to display\n\n\nReturn value\nnone\n\nFunction Information\nDisplay message on screen. The last 20 lines are displayed.\n\nExample\nDebugPrint(\"time\")"
     },
+    "UiMakeInteractive": {
+        "scope": "lua",
+        "body": "UiMakeInteractive()",
+        "prefix": "UiMakeInteractive",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nCalling this function will disable game input, bring up the mouse pointer and allow Ui interaction with the calling script without pausing the game. This can be useful to make interactive user interfaces from scripts while the game is running. Call this continuously every frame as long as Ui interaction is desired.\n\nExample\nUiMakeInteractive()"
+    },
+    "UiPush": {
+        "scope": "lua",
+		"body": [
+			"UiPush()",
+			"\t$0",
+			"UiPop()"
+		],
+        "prefix": "UiPush",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nPush state onto stack. This is used in combination with UiPop to remember a state and restore to that state later.\n\nExample\nUiColor(1,0,0)\nUiText(\"Red\")\nUiPush()\n\tUiColor(0,1,0)\n\tUiText(\"Green\")\nUiPop()\nUiText(\"Red\")"
+    },
+    "UiPop": {
+        "scope": "lua",
+        "body": "UiPop()",
+        "prefix": "UiPop",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nPop state from stack and make it the current one. This is used in combination with UiPush to remember a previous state and go back to it later.\n\nExample\nUiColor(1,0,0)\nUiText(\"Red\")\nUiPush()\n\tUiColor(0,1,0)\n\tUiText(\"Green\")\nUiPop()\nUiText(\"Red\")"
+    },
+    "UiWidth": {
+        "scope": "lua",
+        "body": "UiWidth()",
+        "prefix": "UiWidth",
+        "description": "Arguments\nnone\n\nReturn value\nwidth (number) – Width of draw context\n\n\nFunction Information\nnone\n\nExample\nlocal w = UiWidth()"
+    },
+    "UiHeight": {
+        "scope": "lua",
+        "body": "UiHeight()",
+        "prefix": "UiHeight",
+        "description": "Arguments\nnone\n\nReturn value\nheight (number) – Height of draw context\n\n\nFunction Information\nnone\n\nExample\nlocal h = UiHeight()"
+    },
+    "UiCenter": {
+        "scope": "lua",
+        "body": "UiCenter()",
+        "prefix": "UiCenter",
+        "description": "Arguments\nnone\n\nReturn value\ncenter (number) – Half width of draw context\n\n\nFunction Information\nnone\n\nExample\nlocal c = UiCenter()\n--Same as \nlocal c = UiWidth()/2"
+    },
+    "UiMiddle": {
+        "scope": "lua",
+        "body": "UiMiddle()",
+        "prefix": "UiMiddle",
+        "description": "Arguments\nnone\n\nReturn value\nmiddle (number) – Half height of draw context\n\n\nFunction Information\nnone\n\nExample\nlocal m = UiMiddle()\n--Same as\nlocal m = UiHeight()/2"
+    },
     "UiColor": {
         "scope": "lua",
-        "body": "UiColor(${r},${g},${b},${a})",
+        "body": "UiColor(${r},${g},${b},a)",
         "prefix": "UiColor",
         "description": "Arguments\nr (number) – Red channel\ng (number) – Green channel\nb (number) – Blue channel\na (number, optional) – Alpha channel. Default 1.0\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\n--Set color yellow\nUiColor(1,1,0)"
     },
     "UiColorFilter": {
         "scope": "lua",
-        "body": "UiColorFilter(${r},${g},${b},${a})",
+        "body": "UiColorFilter(${r},${g},${b},a)",
         "prefix": "UiColorFilter",
         "description": "Arguments\nr (number) – Red channel\ng (number) – Green channel\nb (number) – Blue channel\na (number, optional) – Alpha channel. Default 1.0\n\n\nReturn value\nnone\n\nFunction Information\nColor filter, multiplied to all future colors in this scope\n\nExample\nUiPush()\n\t--Draw menu in transparent, yellow color tint\n\tUiColorFilter(1, 1, 0, 0.5)\n\tdrawMenu()\nUiPop()"
     },
@@ -1069,21 +1300,63 @@
     },
     "UiScale": {
         "scope": "lua",
-        "body": "UiScale(${x},${y})",
+        "body": "UiScale(${x},y)",
         "prefix": "UiScale",
         "description": "Arguments\nx (number) – X component\ny (number, optional) – Y component. Default value is x.\n\n\nReturn value\nnone\n\nFunction Information\nScale cursor either uniformly (one argument) or non-uniformly (two arguments)\n\nExample\nUiPush()\n\tUiScale(2)\n\tUiText(\"Double size\")\nUiPop()"
     },
     "UiWindow": {
         "scope": "lua",
-        "body": "UiWindow(${width},${height},${clip})",
+        "body": "UiWindow(${width},${height},clip)",
         "prefix": "UiWindow",
         "description": "Arguments\nwidth (number) – Window width\nheight (number) – Window height\nclip (boolean, optional) – Clip content outside window. Default is false.\n\n\nReturn value\nnone\n\nFunction Information\nSet up new bounds. Calls to UiWidth, UiHeight, UiCenter and UiMiddle will operate in the context of the window size. If clip is set to true, contents of window will be clipped to bounds (only works properly for non-rotated windows).\n\nExample\nUiPush()\n\tUiWindow(400, 200)\n\tlocal w = UiWidth()\n\t--w is now 400\nUiPop()"
+    },
+    "UiSafeMargins": {
+        "scope": "lua",
+        "body": "UiSafeMargins()",
+        "prefix": "UiSafeMargins",
+        "description": "Arguments\nnone\n\nReturn value\nx0 (number) – Left\ny0 (number) – Top\nx1 (number) – Right\ny1 (number) – Bottom\n\n\nFunction Information\nReturn a safe drawing area that will always be visible regardless of display aspect ratio. The safe drawing area will always be 1920 by 1080 in size. This is useful for setting up a fixed size UI.\n\nExample\nfunction draw()\n\tlocal x0, y0, x1, y1 = UiSafeMargins()\n\tUiTranslate(x0, y0)\n\tUiWindow(x1-x0, y1-y0, true)\n\t--The drawing area is now 1920 by 1080 in the center of screen\n\tdrawMenu()\nend"
     },
     "UiAlign": {
         "scope": "lua",
         "body": "UiAlign('${alignment}')",
         "prefix": "UiAlign",
         "description": "Arguments\nalignment (string) – Alignment keywords\n\n\nReturn value\nnone\n\nFunction Information\nThe alignment determines how content is aligned with respect to the cursor.\n\nExample\nUiAlign(\"left\")\nUiText(\"Aligned left at baseline\")\n\nUiAlign(\"center middle\")\nUiText(\"Fully centered\")"
+    },
+    "UiModalBegin": {
+        "scope": "lua",
+        "body": "UiModalBegin()",
+        "prefix": "UiModalBegin",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nDisable input for everything, except what's between UiModalBegin and UiModalEnd (or if modal state is popped)\n\nExample\nUiModalBegin()\nif UiTextButton(\"Okay\") then\n\t--All other interactive ui elements except this one are disabled\nend\nUiModalEnd()\n\n--This is also okay\nUiPush()\n\tUiModalBegin()\n\tif UiTextButton(\"Okay\") then\n\t\t--All other interactive ui elements except this one are disabled\n\tend\nUiPop()\n--No longer modal"
+    },
+    "UiModalEnd": {
+        "scope": "lua",
+        "body": "UiModalEnd()",
+        "prefix": "UiModalEnd",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nDisable input for everything, except what's between UiModalBegin and UiModalEnd Calling this function is optional. Modality is part of the current state and will be lost if modal state is popped.\n\nExample\nUiModalBegin()\nif UiTextButton(\"Okay\") then\n\t--All other interactive ui elements except this one are disabled\nend\nUiModalEnd()"
+    },
+    "UiDisableInput": {
+        "scope": "lua",
+        "body": "UiDisableInput()",
+        "prefix": "UiDisableInput",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nDisable input\n\nExample\nUiPush()\n\tUiDisableInput()\n\tif UiButtonText(\"Okay\") then\n\t\t--Will never happen\n\tend\nUiPop()"
+    },
+    "UiEnableInput": {
+        "scope": "lua",
+        "body": "UiEnableInput()",
+        "prefix": "UiEnableInput",
+        "description": "Arguments\nnone\n\nReturn value\nnone\n\nFunction Information\nEnable input that has been previously disabled\n\nExample\nUiDisableInput()\nif UiButtonText(\"Okay\") then\n\t--Will never happen\nend\n\nUiEnableInput()\nif UiButtonText(\"Okay\") then\n\t--This can happen\nend"
+    },
+    "UiReceivesInput": {
+        "scope": "lua",
+        "body": "UiReceivesInput()",
+        "prefix": "UiReceivesInput",
+        "description": "Arguments\nnone\n\nReturn value\nreceives (boolean) – True if current context receives input\n\n\nFunction Information\nThis function will check current state receives input. This is the case if input is not explicitly disabled with (with UiDisableInput) and no other state is currently modal (with UiModalBegin). Input functions and UI elements already do this check internally, but it can sometimes be useful to read the input state manually to trigger things in the UI.\n\nExample\nif UiReceivesInput() then\n\thighlightItemAtMousePointer()\nend"
+    },
+    "UiGetMousePos": {
+        "scope": "lua",
+        "body": "UiGetMousePos()",
+        "prefix": "UiGetMousePos",
+        "description": "Arguments\nnone\n\nReturn value\nx (number) – X coordinate\ny (number) – Y coordinate\n\n\nFunction Information\nGet mouse pointer position relative to the cursor\n\nExample\nlocal x, y = UiGetMousePos()"
     },
     "UiIsMouseInRect": {
         "scope": "lua",
@@ -1105,19 +1378,25 @@
     },
     "UiBlur": {
         "scope": "lua",
-        "body": "UiBlur(${amount},${amount})",
+        "body": "UiBlur(${amount},amount)",
         "prefix": "UiBlur",
         "description": "Arguments\namount (number) – Blur amount (0.0 to 1.0)\n\n\nReturn value\nnone\n\nFunction Information\nPerform a gaussian blur on current screen content\n\nExample\nUiBlur(1.0)\ndrawMenu()"
     },
     "UiFont": {
         "scope": "lua",
-        "body": "UiFont('${path}',${size},${size})",
+        "body": "UiFont('${path}',${size},size)",
         "prefix": "UiFont",
         "description": "Arguments\npath (string) – Path to TTF font file\nsize (number) – Font size (10 to 100)\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nUiFont(\"bold.ttf\", 24)\nUiText(\"Hello\")"
     },
+    "UiFontHeight": {
+        "scope": "lua",
+        "body": "UiFontHeight()",
+        "prefix": "UiFontHeight",
+        "description": "Arguments\nnone\n\nReturn value\nsize (number) – Font size\n\n\nFunction Information\nnone\n\nExample\nlocal h = UiFontHeight()"
+    },
     "UiText": {
         "scope": "lua",
-        "body": "UiText('${text}',${move})",
+        "body": "UiText('${text}',move)",
         "prefix": "UiText",
         "description": "Arguments\ntext (string) – Print text at cursor location\nmove (boolean, optional) – Automatically move cursor vertically. Default false.\n\n\nReturn value\nw (number) – Width of text\nh (number) – Height of text\n\n\nFunction Information\nnone\n\nExample\nUiFont(\"bold.ttf\", 24)\nUiText(\"Hello\")\n\n...\n\n--Automatically advance cursor\nUiText(\"First line\", true)\nUiText(\"Second line\", true)"
     },
@@ -1135,13 +1414,13 @@
     },
     "UiTextOutline": {
         "scope": "lua",
-        "body": "UiTextOutline(${r},${g},${b},${a},${thickness})",
+        "body": "UiTextOutline(${r},${g},${b},${a},thickness)",
         "prefix": "UiTextOutline",
         "description": "Arguments\nr (number) – Red channel\ng (number) – Green channel\nb (number) – Blue channel\na (number) – Alpha channel\nthickness (number, optional) – Outline thickness. Default is 0.1\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\n--Black outline, standard thickness\nUiTextOutline(0,0,0,1)\nUiText(\"Text with outline\")"
     },
     "UiTextShadow": {
         "scope": "lua",
-        "body": "UiTextShadow(${r},${g},${b},${a},${distance},${blur})",
+        "body": "UiTextShadow(${r},${g},${b},${a},distance,blur)",
         "prefix": "UiTextShadow",
         "description": "Arguments\nr (number) – Red channel\ng (number) – Green channel\nb (number) – Blue channel\na (number) – Alpha channel\ndistance (number, optional) – Shadow distance. Default is 1.0\nblur (number, optional) – Shadow blur. Default is 0.5\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\n--Black drop shadow, 50% transparent, distance 2\nUiTextShadow(0, 0, 0, 0.5, 2.0)\nUiText(\"Text with drop shadow\")"
     },
@@ -1153,55 +1432,55 @@
     },
     "UiImage": {
         "scope": "lua",
-        "body": "UiImage('${path}',${image})",
+        "body": "UiImage('${path}',image)",
         "prefix": "UiImage",
         "description": "Arguments\npath (string) – Path to image (PNG or JPG format)\n\n\nReturn value\nw (number) – Image width\nh (number) – Image height\n\n\nFunction Information\nDraw image at cursor position\n\nExample\n--Draw image in center of screen\nUiPush()\n\tUiTranslate(UiCenter(), UiMiddle())\n\tUiAlign(\"center middle\")\n\tUiImage(\"test.png\")\nUiPop()"
     },
     "UiGetImageSize": {
         "scope": "lua",
-        "body": "UiGetImageSize('${path}',${image})",
+        "body": "UiGetImageSize('${path}',image)",
         "prefix": "UiGetImageSize",
         "description": "Arguments\npath (string) – Path to image (PNG or JPG format)\n\n\nReturn value\nw (number) – Image width\nh (number) – Image height\n\n\nFunction Information\nGet image size\n\nExample\nlocal w,h = UiGetImageSize(\"test.png\")"
     },
     "UiImageBox": {
         "scope": "lua",
-        "body": "UiImageBox('${path}',${image},${width},${height},${borderWidth},${borderHeight})",
+        "body": "UiImageBox('${path}',image,${width},${height},${borderWidth},${borderHeight})",
         "prefix": "UiImageBox",
         "description": "Arguments\npath (string) – Path to image (PNG or JPG format)\nwidth (number) – Width\nheight (number) – Height\nborderWidth (number) – Border width\nborderHeight (number) – Border height\n\n\nReturn value\nnone\n\nFunction Information\nDraw 9-slice image at cursor position. Width should be at least 2*borderWidth. Height should be at least 2*borderHeight.\n\nExample\nUiImageBox(\"menu-frame.png\", 200, 200, 10, 10)"
     },
     "UiSound": {
         "scope": "lua",
-        "body": "UiSound('${path}',${file},${volume},${pitch},${pan},${panning})",
+        "body": "UiSound('${path}',file,volume,pitch,pan,panning)",
         "prefix": "UiSound",
         "description": "Arguments\npath (string) – Path to sound file (OGG format)\nvolume (number, optional) – Playback volume. Default 1.0\npitch (number, optional) – Playback pitch. Default 1.0\npan (number, optional) – Playback stereo panning (-1.0 to 1.0). Default 0.0.\n\n\nReturn value\nnone\n\nFunction Information\nUI sounds are not affected by acoustics simulation. Use LoadSound / PlaySound for that.\n\nExample\nUiSound(\"click.ogg\")"
     },
     "UiSoundLoop": {
         "scope": "lua",
-        "body": "UiSoundLoop('${path}',${file},${volume})",
+        "body": "UiSoundLoop('${path}',file,volume)",
         "prefix": "UiSoundLoop",
         "description": "Arguments\npath (string) – Path to looping sound file (OGG format)\nvolume (number, optional) – Playback volume. Default 1.0\n\n\nReturn value\nnone\n\nFunction Information\nCall this continuously to keep playing loop. UI sounds are not affected by acoustics simulation. Use LoadLoop / PlayLoop for that.\n\nExample\nif animating then\n\tUiSoundLoop(\"screech.ogg\")\nend"
     },
     "UiMute": {
         "scope": "lua",
-        "body": "UiMute(${amount},${amount},${music})",
+        "body": "UiMute(${amount},amount,music)",
         "prefix": "UiMute",
         "description": "Arguments\namount (number) – Mute by this amount (0.0 to 1.0)\nmusic (boolean, optional) – Mute music as well\n\n\nReturn value\nnone\n\nFunction Information\nMute game audio and optionally music for the next frame. Call continuously to stay muted.\n\nExample\nif menuOpen then\n\tUiMute(1.0)\nend"
     },
     "UiButtonImageBox": {
         "scope": "lua",
-        "body": "UiButtonImageBox('${path}',${image},${borderWidth},${borderHeight},${r},${g},${b},${a})",
+        "body": "UiButtonImageBox('${path}',image,${borderWidth},${borderHeight},r,g,b,a)",
         "prefix": "UiButtonImageBox",
         "description": "Arguments\npath (string) – Path to image (PNG or JPG format)\nborderWidth (number) – Border width\nborderHeight (number) – Border height\nr (number, optional) – Red multiply. Default 1.0\ng (number, optional) – Green multiply. Default 1.0\nb (number, optional) – Blue multiply. Default 1.0\na (number, optional) – Alpha channel. Default 1.0\n\n\nReturn value\nnone\n\nFunction Information\nSet up 9-slice image to be used as background for buttons.\n\nExample\nUiButtonImageBox(\"button-9slice.png\", 10, 10)\nif UiTextButton(\"Test\") then\n\t...\nend"
     },
     "UiButtonHoverColor": {
         "scope": "lua",
-        "body": "UiButtonHoverColor(${r},${g},${b},${a})",
+        "body": "UiButtonHoverColor(${r},${g},${b},a)",
         "prefix": "UiButtonHoverColor",
         "description": "Arguments\nr (number) – Red multiply\ng (number) – Green multiply\nb (number) – Blue multiply\na (number, optional) – Alpha channel. Default 1.0\n\n\nReturn value\nnone\n\nFunction Information\nButton color filter when hovering mouse pointer.\n\nExample\nUiButtonHoverColor(1, 0, 0)\nif UiTextButton(\"Test\") then\n\t...\nend"
     },
     "UiButtonPressColor": {
         "scope": "lua",
-        "body": "UiButtonPressColor(${r},${g},${b},${a})",
+        "body": "UiButtonPressColor(${r},${g},${b},a)",
         "prefix": "UiButtonPressColor",
         "description": "Arguments\nr (number) – Red multiply\ng (number) – Green multiply\nb (number) – Blue multiply\na (number, optional) – Alpha channel. Default 1.0\n\n\nReturn value\nnone\n\nFunction Information\nButton color filter when pressing down.\n\nExample\nUiButtonPressColor(0, 1, 0)\nif UiTextButton(\"Test\") then\n\t...\nend"
     },
@@ -1213,13 +1492,13 @@
     },
     "UiTextButton": {
         "scope": "lua",
-        "body": "UiTextButton('${text}',${w},${h})",
+        "body": "UiTextButton('${text}',w,h)",
         "prefix": "UiTextButton",
         "description": "Arguments\ntext (string) – Text on button\nw (number, optional) – Button width\nh (number, optional) – Button height\n\n\nReturn value\npressed (boolean) – True if user clicked button\n\n\nFunction Information\nnone\n\nExample\nif UiTextButton(\"Test\") then\n\t...\nend"
     },
     "UiImageButton": {
         "scope": "lua",
-        "body": "UiImageButton(${path},${path},${w},${h})",
+        "body": "UiImageButton(${path},path,w,h)",
         "prefix": "UiImageButton",
         "description": "Arguments\npath (number) – Image path (PNG or JPG file)\nw (number, optional) – Button width\nh (number, optional) – Button height\n\n\nReturn value\npressed (boolean) – True if user clicked button\n\n\nFunction Information\nnone\n\nExample\nif UiImageButton(\"image.png\") then\n\t...\nend"
     },
@@ -1231,8 +1510,14 @@
     },
     "UiSlider": {
         "scope": "lua",
-        "body": "UiSlider(${path},${path},'${axis}',${current},${min},${max})",
+        "body": "UiSlider(${path},path,'${axis}',${current},${min},${max})",
         "prefix": "UiSlider",
         "description": "Arguments\npath (number) – Image path (PNG or JPG file)\naxis (string) – Drag axis, must be \"x\" or \"y\"\ncurrent (number) – Current value\nmin (number) – Minimum value\nmax (number) – Maximum value\n\n\nReturn value\nvalue (number) – New value, same as current if not changed\ndone (boolean) – True if user is finished changing (released slider)\n\n\nFunction Information\nnone\n\nExample\nvalue = UiSlider(\"dot.png\", \"x\", value, 0, 100)"
+    },
+    "UiGetScreen": {
+        "scope": "lua",
+        "body": "UiGetScreen()",
+        "prefix": "UiGetScreen",
+        "description": "Arguments\nnone\n\nReturn value\nhandle (number) – Handle to the screen running this script or zero if none.\n\n\nFunction Information\nnone\n\nExample\n--Turn off screen running current script\nscreen = UiGetScreen()\nSetScreenEnabled(screen, false)"
     }
 }
