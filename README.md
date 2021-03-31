@@ -10,6 +10,9 @@ Repository for my [Visual Studio Extension](https://marketplace.visualstudio.com
 # Teardown-API Snippets
 Teardown API Snippets (https://teardowngame.com/modding/api.html)
 
+## TODO
+- Add DataType Boolean back (removed from latest version because I forgot to add it back)
+
 ## Example
 ![Example](https://i.imgur.com/ZQA3ui3.png "Example")
 
