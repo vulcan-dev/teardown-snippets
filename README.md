@@ -51,11 +51,11 @@ UiPop()
 - Added function descriptions
 - Auto complete now adds the necessary function arguments
 
-### Release 1.0.6
-- Updated function arguments so it can handle all datatypes. Tabbing also now selects each argument when you create the function
-
 >![Params](https://i.imgur.com/xWpmDkd.png "Function Description")
 >![Params](https://i.imgur.com/3WnDZR3.png "Function Parameters")
+
+### Release 1.0.6
+- Updated function arguments so it can handle all datatypes. Tabbing also now selects each argument when you create the function
 
 ### Other
 > I did try doing this for Sublime Text 3 but it doesn't allow multiline descriptions so I don't see the point because you'll have to go to the teardown website (I made this so you don't have to do that)
