@@ -1,5 +1,5 @@
 src/.dccache
-
+src/*.json
 .vs*
 package.json
 *.vsix
