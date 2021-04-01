@@ -54,7 +54,7 @@
     },
     "GetBoolParam": {
         "scope": "lua",
-        "body": "GetBoolParam('${name}',default)",
+        "body": "GetBoolParam('${name}',${default})",
         "prefix": "GetBoolParam",
         "description": "Arguments\nname (string) – Parameter name\ndefault (boolean) – Default parameter value\n\n\nReturn value\nvalue (boolean) – Parameter value\n\n\nFunction Information\nnone\n\nExample\n--Retrieve playsound parameter, or false if omitted\nparameterPlaySound = GetBoolParameter(\"playsound\", false)"
     },
@@ -126,7 +126,7 @@
     },
     "SetPaused": {
         "scope": "lua",
-        "body": "SetPaused(paused)",
+        "body": "SetPaused(${paused})",
         "prefix": "SetPaused",
         "description": "Arguments\npaused (boolean) – True if game should be paused\n\n\nReturn value\nnone\n\nFunction Information\nSet paused state of the game\n\nExample\n--Pause game and bring up pause menu on HUD\nSetPaused(true)"
     },
@@ -186,7 +186,7 @@
     },
     "SetBool": {
         "scope": "lua",
-        "body": "SetBool('${key}',value)",
+        "body": "SetBool('${key}',${value})",
         "prefix": "SetBool",
         "description": "Arguments\nkey (string) – Registry key\nvalue (boolean) – Desired value\n\n\nReturn value\nnone\n\nFunction Information\nnone\n\nExample\nSetBool(\"level.robots.enabled\", true)"
     },
@@ -444,7 +444,7 @@
     },
     "SetBodyDynamic": {
         "scope": "lua",
-        "body": "SetBodyDynamic(${handle},dynamic)",
+        "body": "SetBodyDynamic(${handle},${dynamic})",
         "prefix": "SetBodyDynamic",
         "description": "Arguments\nhandle (number) – Body handle\ndynamic (boolean) – True for dynamic. False for static.\n\n\nReturn value\nnone\n\nFunction Information\nChange the dynamic state of a body. There is very limited use for this function. In most situations you should leave it up to the engine to decide. Use with caution.\n\nExample\nSetBodyDynamic(body, false)"
     },
@@ -732,7 +732,7 @@
     },
     "SetLightEnabled": {
         "scope": "lua",
-        "body": "SetLightEnabled(${handle},enabled)",
+        "body": "SetLightEnabled(${handle},${enabled})",
         "prefix": "SetLightEnabled",
         "description": "Arguments\nhandle (number) – Light handle\nenabled (boolean) – Set to true if light should be enabled\n\n\nReturn value\nnone\n\nFunction Information\nIf light is owned by a shape, the emissive scale of that shape will be set to 0.0 when light is disabled and 1.0 when light is enabled.\n\nExample\nSetLightEnabled(light, false)"
     },
@@ -834,7 +834,7 @@
     },
     "SetScreenEnabled": {
         "scope": "lua",
-        "body": "SetScreenEnabled(${screen},enabled)",
+        "body": "SetScreenEnabled(${screen},${enabled})",
         "prefix": "SetScreenEnabled",
         "description": "Arguments\nscreen (number) – Screen handle\nenabled (boolean) – True if screen should be enabled\n\n\nReturn value\nnone\n\nFunction Information\nEnable or disable screen\n\nExample\nSetScreenEnabled(screen, true)"
     },
@@ -888,7 +888,7 @@
     },
     "DriveVehicle": {
         "scope": "lua",
-        "body": "DriveVehicle(${vehicle},${drive},${steering},handbrake)",
+        "body": "DriveVehicle(${vehicle},${drive},${steering},${handbrake})",
         "prefix": "DriveVehicle",
         "description": "Arguments\nvehicle (number) – Vehicle handle\ndrive (number) – Reverse/forward control -1 to 1\nsteering (number) – Left/right control -1 to 1\nhandbrake (boolean) – Handbrake control\n\n\nReturn value\nnone\n\nFunction Information\nThis function applies input to vehicles, allowing for autonomous driving. The vehicle will be turned on automatically and turned off when no longer called. Call this from the tick function, not update.\n\nExample\nfunction tick()\n\t--Drive mycar forwards\n\tlocal v = FindVehicle(\"mycar\")\n\tDriveVehicle(v, 1, 0, false)\nend"
     },
