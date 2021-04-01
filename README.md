@@ -70,5 +70,12 @@ UiPop()
 ### Other
 > I did try doing this for Sublime Text 3 but it doesn't allow multiline descriptions so I don't see the point because you'll have to go to the teardown website (I made this so you don't have to do that)
 
+### Installation
+> [1] Run the code from api.js on [this website](https://teardowngame.com/modding/api.html)  
+[2] Copy the object from the return result  
+[3] Paste that inside of data.json inside of src/  
+[4] Run : python fix-json.py  
+[5] This will create an output.json file in the src/ directory. From there you can do what you'd like
+
 Thanks to [Thomasims](https://github.com/Thomasims) for helping with the scraping part with JS  
 Thanks to [Cammy](https://github.com/camprevail) for helping me make an automated JSON fixer so I can parse the JSON
