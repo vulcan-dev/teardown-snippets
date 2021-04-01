@@ -60,12 +60,13 @@ DOC = [...document.getElementsByClassName("function")].map((el) => {
                         args[i] = "'${" + args[i] + "}'";
                     } else if (value[i] === '(table)') {
                         args[i] = '(${' + args[i] + '})';
-                    } else if (value[i] === '(number)') {
+                    } else if (value[i] === '(number)' || value[i] === '(boolean)') {
                         args[i] = '${' + args[i] + '}';
                     }
                 }
             }
-        })
+        }
+    );
 
     keyValue(data);
 
