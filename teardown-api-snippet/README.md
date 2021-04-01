@@ -55,6 +55,8 @@ UiPop()
 - Added back init, tick, update, draw functions
 - Added back all functions that don't have arguments
 
+### Release 1.3.7
+- Added datatype boolean
 
 Thanks to [Thomasims](https://github.com/Thomasims) for helping with the scraping part with JS  
 Thanks to [Cammy](https://github.com/camprevail) for helping me make an automated JSON fixer so I can parse the JSON

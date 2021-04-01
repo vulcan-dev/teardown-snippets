@@ -51,3 +51,5 @@ UiPop()
 - Added back init, tick, update, draw functions
 - Added back all functions that don't have arguments
 
+### Release 1.3.7
+- Added datatype boolean
