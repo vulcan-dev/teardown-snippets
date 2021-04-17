@@ -1,5 +1,10 @@
 src/.dccache
-src/*.json
+src/data.json
+src/output.json
 .vs*
 package.json
 *.vsix
+tests/
+.dccache
+test.js
+old.js

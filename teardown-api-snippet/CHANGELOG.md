@@ -53,3 +53,7 @@ UiPop()
 
 ### Release 1.3.7
 - Added datatype boolean
+
+### Release 1.3.8
+- Updated snippets to suit the new Teardown API to 0.7.0  
+> Download old version from [here](https://github.com/vulcan-dev/teardown-snippets/releases/tag/1.3.7) if you downloaded via VSC (If you want anyways)

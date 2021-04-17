@@ -67,6 +67,9 @@ UiPop()
 ### Release 1.3.7
 - Added datatype boolean
 
+### Release 1.3.8
+- Updated snippets to suit the new Teardown API to 0.7.0  
+
 ### Other
 > I did try doing this for Sublime Text 3 but it doesn't allow multiline descriptions so I don't see the point because you'll have to go to the teardown website (I made this so you don't have to do that)
 

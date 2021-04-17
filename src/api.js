@@ -7,23 +7,29 @@ DOC = [...document.getElementsByClassName("function")].map((el) => {
 
     const optregex = /, optional\)$/;
     const argregex = /^\(([^,\)]*)/;
-    const paramregex = /\w+(?=\s+\()/g;
+    //const paramregex = /\w+(?=\s+\()/g;
+    const paramregex = /[^Arguments]^\S+()/gm;
     const dataType = /\((.*?)\)/g;
 
     const mapper = arg => {
         const typea = arg.nextElementSibling;
         if (!typea || !typea.classList.contains("argtype")) return;
         return {
-            name: arg.textContent,
-            type: typea.textContent.match(argregex)[1],
-            optional: optregex.test(typea.textContent),
-            desc: typea.nextSibling.textContent.substr(3).trim(),
-            param: typea.textContent.match(paramregex)[1]
+            arg: {
+                name: arg.textContent,
+                type: typea.textContent.match(argregex)[1],
+                optional: optregex.test(typea.textContent),
+                desc: typea.nextSibling.textContent.substr(3).trim()
+            }
         };
     };
 
-    const arguments = el.innerText;
-    el = el.nextElementSibling;
+    const arguments = [...el.getElementsByClassName('argname')].map(mapper).filter(arg => arg);
+
+    console.log(Object.values(arguments.arg['name']));
+
+    // const arguments = el.innerText;
+    // el = el.nextElementSibling;
 
     const rets = el.innerText;
     el = el.nextElementSibling;
@@ -41,41 +47,20 @@ DOC = [...document.getElementsByClassName("function")].map((el) => {
 
     const example = el.innerText.trim();
 
-
-    let args = arguments.match(paramregex);
-    if (args === null) args = "";
-
-    data = {
-        info: args,
-        dataType: arguments.match(dataType)
-    }
-
-    const keyValue = (input) =>
-        Object.entries(input).forEach(([key, value]) => {
-            if (value == null) return
-
-            for (let i = 0; i < value.length; i++) {
-                if (value) {
-                    if (value[i] === '(string)') {
-                        args[i] = "'${" + args[i] + "}'";
-                    } else if (value[i] === '(table)') {
-                        args[i] = '(${' + args[i] + '})';
-                    } else if (value[i] === '(number)' || value[i] === '(boolean)') {
-                        args[i] = '${' + args[i] + '}';
-                    }
-                }
-            }
-        }
-    );
-
-    keyValue(data);
-
     innerObj = {
         scope: "lua",
-        body: `${name}(${args})`,
+        body: `${name}(${arguments.arguments['name']})`,
         prefix: name,
         description: `${arguments}\n\n${rets}\n\nFunction Information\n${funcInfo}\n\nExample\n${example}`
     };
+
+    innerObj = {
+        args: {
+            name: "ok"
+        }
+    }
+
+    console.log(innerObj.args['name'])
 
     return innerObj;
 }, {}).filter(notUndefined => notUndefined !== undefined)
