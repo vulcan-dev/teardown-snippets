@@ -5,7 +5,7 @@
 [![Badge for version for Visual Studio Code extension naereen.makefiles-support-for-vscode](https://vsmarketplacebadge.apphb.com/version/vulcan-dev.teardown-api-snippet.svg)](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet) [![Badge for version for Visual Studio Code extension naereen.makefiles-support-for-vscode](https://vsmarketplacebadge.apphb.com/installs/vulcan-dev.teardown-api-snippet.svg)](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet) [![Badge for rating for Visual Studio Code extension naereen.makefiles-support-for-vscode](https://vsmarketplacebadge.apphb.com/rating/vulcan-dev.teardown-api-snippet.svg)](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet)
 
 
-Repository for my [Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api-snippet)
+Repository for my [Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=vulcan-dev.teardown-api)
 
 # Teardown-API Snippets
 Teardown API Snippets (https://teardowngame.com/modding/api.html)
